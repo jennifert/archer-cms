@@ -1,0 +1,43 @@
+
+.copyright{
+  font-size: 10px;
+  margin:0 auto;
+  width: 100%;
+  text-align: center;
+}
+
+.clearfix{
+  clear: both;
+  border:0;
+}
+
+.pass{
+  color: #468847;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+.fail{
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}
+
+.pass, .fail{
+  padding: 14px;
+  text-align: center;
+}
+
+.input-error{
+  border: 1px solid #b94a48;
+  color: #b94a48;
+}
+.inline-form {
+  display:inline;
+  padding-right:10px;
+}
+
+.signed-in .home-img{
+  border: 0;
+  height:200px;
+}
