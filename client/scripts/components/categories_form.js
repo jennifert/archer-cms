@@ -25,7 +25,10 @@ class CategoryForm extends React.Component {
 
   fetchEditCategory(){
     let newCategory='';
-      fetch(`/api/categories/${this.props.match.params.categoryid}`)
+      fetch(`/api/categories/${this.props.match.params.categoryid}`, {
+        method: 'GET',
+        credentials: 'include'
+      })
       .then(resp => resp.json())
       .then((json) => {
         this.setState({newCategory:json.name})
@@ -48,6 +51,7 @@ class CategoryForm extends React.Component {
      }
     fetch (fetchURL, {
       method: fetchMethod,
+      credentials: 'include',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -61,7 +65,8 @@ class CategoryForm extends React.Component {
     .then((res) => {
       if (res.ok) {
         this.setState({ errors: null });
-        this.props.fetchCategories(); //TODO: fix this error!
+        this.props.fetchCategories();
+        this.props.history.push('/categories');
       } else {
         res.json().then(errors => this.setState({ errors }));
       }

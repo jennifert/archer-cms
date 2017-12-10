@@ -2,15 +2,16 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
+const requireLogin = require('./require_login');
 
 const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
 
-// mongoose.connect('mongodb://localhost/archercms', {
-//     useMongoClient: true,
-// });
-mongoose.connect(process.env.MONGODB_SERVER);
+mongoose.connect(process.env.MONGODB_SERVER, {
+    useMongoClient: true,
+});
+// mongoose.connect(process.env.MONGODB_SERVER);
 
 //data schemas
 const User = require('./server/users.js');
@@ -36,7 +37,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use(express.static('public'));
 app.use(express.static('assets'));
 
-app.get('/api/page', (req, res) => {
+app.get('/api/page', requireLogin, (req, res) => {
   Page.find().populate('user type category tags').exec().then((pages) => {
     res.status(200).send(pages);
   }).catch((err) => {
@@ -44,7 +45,7 @@ app.get('/api/page', (req, res) => {
   });
 });
 
-app.post('/api/page', (req, res, next) => {
+app.post('/api/page', requireLogin, (req, res, next) => {
   const pageModel = new Page();
   const page = Object.assign(pageModel, req.body);
   page.save((err, doc) => {
@@ -61,7 +62,7 @@ app.post('/api/page', (req, res, next) => {
   });
 });
 
-app.get('/api/page/:id', (req, res, next) => {
+app.get('/api/page/:id', requireLogin, (req, res, next) => {
   const pageId = req.params.id;
   Page.findOne({
       _id:pageId
@@ -70,7 +71,7 @@ app.get('/api/page/:id', (req, res, next) => {
   });
 });
 
-app.put('/api/page/:id', (req, res, next) => {
+app.put('/api/page/:id', requireLogin, (req, res, next) => {
   const model = req.body;
   const page = Page.findById(req.params.id, (err, doc) => {
       if (err) {
@@ -95,7 +96,7 @@ app.put('/api/page/:id', (req, res, next) => {
   });
 });
 
-app.delete('/api/page/:id', (req, res) => {
+app.delete('/api/page/:id', requireLogin, (req, res) => {
   const pageId = req.params.id;
   Page.remove({_id: pageId})
     .then((doc)=>{
@@ -105,7 +106,7 @@ app.delete('/api/page/:id', (req, res) => {
     });
 });
 
-app.get('/api/type', (req, res, next) => {
+app.get('/api/type', requireLogin, (req, res, next) => {
   ContentType.find().then((contenttypes) => {
     res.status(200).send(contenttypes);
   }).catch((err) => {
@@ -113,7 +114,7 @@ app.get('/api/type', (req, res, next) => {
   });
 });
 
-app.get('/api/categories', (req, res, next) => {
+app.get('/api/categories', requireLogin, (req, res, next) => {
   Categorie.find().populate('user').exec().then((categories) => {
     res.status(200).send(categories);
   }).catch((err) => {
@@ -121,7 +122,7 @@ app.get('/api/categories', (req, res, next) => {
   });
 });
 
-app.post('/api/categories/', (req, res, next) => {
+app.post('/api/categories/', requireLogin, (req, res, next) => {
   const categoryModel = new Categorie();
   const category = Object.assign(categoryModel, req.body);
   category.save((err, doc) => {
@@ -138,7 +139,7 @@ app.post('/api/categories/', (req, res, next) => {
   });
 });
 
-app.put('/api/categories/:id', (req, res, next) => {
+app.put('/api/categories/:id', requireLogin, (req, res, next) => {
   const model = req.body;
   const category = Categorie.findById(req.params.id, (err, doc) => {
       if (err) {
@@ -163,7 +164,7 @@ app.put('/api/categories/:id', (req, res, next) => {
   });
 });
 
-app.get('/api/categories/:id', (req, res, next) => {
+app.get('/api/categories/:id', requireLogin, (req, res, next) => {
   const categoryId = req.params.id;
   Categorie.findOne({
       _id:categoryId
@@ -172,7 +173,7 @@ app.get('/api/categories/:id', (req, res, next) => {
   });
 });
 
-app.delete('/api/categories/:id', (req, res) => {
+app.delete('/api/categories/:id', requireLogin, (req, res) => {
   const categoryId = req.params.id;
   Categorie.remove({_id: categoryId})
     .then((doc)=>{
@@ -182,7 +183,7 @@ app.delete('/api/categories/:id', (req, res) => {
     });
 });
 
-app.get('/api/tags/', (req, res, next) => {
+app.get('/api/tags/', requireLogin, (req, res, next) => {
   Tag.find().populate('user').exec().then((tags) => {
     res.status(200).send(tags);
   }).catch((err) => {
@@ -190,7 +191,7 @@ app.get('/api/tags/', (req, res, next) => {
   });
 });
 
-app.post('/api/tags/', (req, res, next) => {
+app.post('/api/tags/', requireLogin, (req, res, next) => {
   const tagModel = new Tag();
   const tag = Object.assign(tagModel, req.body);
   tag.save((err, doc) => {
@@ -206,7 +207,7 @@ app.post('/api/tags/', (req, res, next) => {
   });
 });
 
-app.put('/api/tags/:id', (req, res, next) => {
+app.put('/api/tags/:id', requireLogin, (req, res, next) => {
   const model = req.body;
   const tag = Tag.findById(req.params.id, (err, doc) => {
       if (err) {
@@ -231,7 +232,7 @@ app.put('/api/tags/:id', (req, res, next) => {
   });
 });
 
-app.get('/api/tags/:id', (req, res, next) => {
+app.get('/api/tags/:id', requireLogin, (req, res, next) => {
   const tagId = req.params.id;
   Tag.findOne({
       _id:tagId
@@ -240,7 +241,7 @@ app.get('/api/tags/:id', (req, res, next) => {
   });
 });
 
-app.delete('/api/tags/:id', (req, res) => {
+app.delete('/api/tags/:id', requireLogin, (req, res) => {
   const tagId = req.params.id;
   Tag.remove({_id: tagId})
     .then((doc)=>{
@@ -250,7 +251,7 @@ app.delete('/api/tags/:id', (req, res) => {
     });
 });
 
-app.get('/api/settings/header/', (req, res, next) => {
+app.get('/api/settings/header/', requireLogin, (req, res, next) => {
   HeaderImage.find().populate('user').exec().then((images) => {
     res.status(200).send(images);
   }).catch((err) => {
@@ -258,7 +259,7 @@ app.get('/api/settings/header/', (req, res, next) => {
   });
 });
 
-app.post('/api/settings/header/', (req, res, next) => {
+app.post('/api/settings/header/', requireLogin, (req, res, next) => {
   const model = new HeaderImage();
   const image = Object.assign(model, req.body);
   image.save((err, doc) => {
@@ -274,7 +275,7 @@ app.post('/api/settings/header/', (req, res, next) => {
   });
 });
 
-app.delete('/api/settings/header/:id', (req, res) => {
+app.delete('/api/settings/header/:id', requireLogin, (req, res) => {
   const imageId = req.params.id;
   HeaderImage.remove({_id: imageId})
     .then((doc)=>{
@@ -284,7 +285,7 @@ app.delete('/api/settings/header/:id', (req, res) => {
     });
 });
 
-app.get('/api/settings/endpoints', (req, res) => {
+app.get('/api/settings/endpoints', requireLogin, (req, res) => {
 const json = `[{
 "_id": 1,
 "route": "/api/login",

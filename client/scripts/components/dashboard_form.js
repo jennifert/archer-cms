@@ -34,7 +34,10 @@ class DashboardForm extends React.Component {
 
   fetchThePages(){
     let thepages='';
-      fetch(`/api/page/${this.props.match.params.dashboardid}`)
+      fetch(`/api/page/${this.props.match.params.dashboardid}`, {
+        method: 'GET',
+        credentials: 'include'
+      })
       .then(resp => resp.json())
       .then((json) => {
           const defaultTags = json.tags;
@@ -121,6 +124,7 @@ class DashboardForm extends React.Component {
 
     fetch (fetchURL, {
       method: fetchMethod,
+      credentials: 'include',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -128,12 +132,11 @@ class DashboardForm extends React.Component {
       body: jsonBody
     })
     .then((res) => {
+      console.log(this.props);
       if (res.ok) {
         this.setState({ errors: null });
-        // this.props.fetchDashboard(); //TODO: fix this error!
-        // this.props.history.push(`/posts/${json._id}`);
-        // this.props.history.push(`/dashboard/`);
-        // history.push('/dashboard');
+        this.props.fetchDashboard();
+        this.props.history.push('/dashboard/');
       } else {
         res.json().then(errors => this.setState({ errors }));
       }
@@ -145,21 +148,30 @@ class DashboardForm extends React.Component {
   }
 
   fetchType(){
-      fetch('/api/type')
+      fetch('/api/type', {
+        method: 'GET',
+        credentials: 'include'
+    })
       .then(resp => resp.json())
       .then(json => this.setState({typeChoose:json}));
   }
 
   fetchCategories(){
       let categories=[];
-      fetch('/api/categories')
+      fetch('/api/categories', {
+        method: 'GET',
+        credentials: 'include'
+    })
       .then(resp => resp.json())
       .then(json => this.setState({category:json}));
   }
 
   fetchTags(){
       let tags=[];
-      fetch('/api/tags')
+      fetch('/api/tags', {
+        method: 'GET',
+        credentials: 'include'
+    })
       .then(resp => resp.json())
       .then(json => this.setState({tags:json}));
   }
@@ -173,14 +185,13 @@ class DashboardForm extends React.Component {
     }
   }
   componentWillReceiveProps(nextProps){
-    // console.log("will receive props", nextProps);
     if (this.props.match.params.dashboardid !== nextProps.match.params.dashboardid) {
       this.fetchThePages();
     }
   }
 
   render() {
-    console.log("rendering");
+    // console.log("rendering");
     const { mode, user,fetchDashboard} = this.props;
     let errorMessage = '';
     if (this.state.errors){

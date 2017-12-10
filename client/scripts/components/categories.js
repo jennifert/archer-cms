@@ -15,13 +15,17 @@ class Categories extends React.Component {
   deleteCategory(id) {
       fetch(`/api/categories/${id}`, {
           method: 'DELETE',
+          credentials: 'include'
       })
       .then(() => this.fetchCategories());
   };
 
   fetchCategories(){
     let categories=[];
-      fetch('/api/categories/')
+      fetch('/api/categories/', {
+        method: 'GET',
+        credentials: 'include'
+    })
       .then(resp => resp.json())
       .then(json => this.setState({ categories:json }));
   }
@@ -69,7 +73,7 @@ class Categories extends React.Component {
                   })}
                  </tbody>
              </table>
-               <Route exact path="/categories/add" render={()=><CategoryForm mode='Add' fetchCategories={null} user={this.props.user} />} />
+               <Route exact path="/categories/add" render={(props)=><CategoryForm {...props} mode='Add' fetchCategories={this.fetchCategories} user={this.props.user} />} />
                <Route path="/categories/edit/:categoryid" render={(props) => <CategoryForm {...props} mode='Edit' fetchCategories={this.fetchCategories} user={this.props.user}/>} />
            </div>
          </main>

@@ -15,13 +15,17 @@ class Tags extends React.Component {
   deleteTags(id) {
       fetch(`/api/tags/${id}`, {
           method: 'DELETE',
+          credentials: 'include'
       })
       .then(() => this.fetchTags());
   };
 
   fetchTags(){
     let tags=[];
-      fetch('/api/tags/')
+      fetch('/api/tags/', {
+        method: 'GET',
+        credentials: 'include'
+    })
       .then(resp => resp.json())
       .then(json => this.setState({ tags:json }));
   }
@@ -32,6 +36,7 @@ class Tags extends React.Component {
 
   render() {
     const { mode, tags} = this.state;
+
     return <main className='tags'>
            <h1>Tags</h1>
 
@@ -69,7 +74,7 @@ class Tags extends React.Component {
                   })}
                  </tbody>
              </table>
-             <Route exact path="/tags/add" render={()=><TagForm mode='Add' fetchTags={this.fetchTags} user={this.props.user} />} />
+             <Route exact path="/tags/add" render={(props)=><TagForm {...props} mode='Add' fetchTags={this.fetchTags} user={this.props.user} />} />
              <Route path="/tags/edit/:tagid" render={(props) => <TagForm {...props} mode='Edit' fetchTags={this.fetchTags} user={this.props.user}/>} />
            </div>
          </main>

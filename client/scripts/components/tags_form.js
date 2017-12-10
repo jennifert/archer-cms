@@ -26,7 +26,10 @@ class TagForm extends React.Component {
 
   fetchEditTag(){
     let newTag='';
-      fetch(`/api/tags/${this.props.match.params.tagid}`)
+      fetch(`/api/tags/${this.props.match.params.tagid}`, {
+        method: 'GET',
+        credentials: 'include'
+      })
       .then(resp => resp.json())
       .then((json) => {
         this.setState({newTag:json.name})
@@ -49,6 +52,7 @@ class TagForm extends React.Component {
      }
     fetch (fetchURL, {
       method: fetchMethod,
+      credentials: 'include',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -62,7 +66,8 @@ class TagForm extends React.Component {
     .then((res) => {
       if (res.ok) {
         this.setState({ errors: null });
-        this.props.fetchTags(); //TODO: fix this error!
+        this.props.fetchTags();
+        this.props.history.push('/tags');
       } else {
         res.json().then(errors => this.setState({ errors }));
       }

@@ -18,15 +18,22 @@ class Dashboard extends React.Component {
   deletePage(id) {
       fetch(`/api/page/${id}`, {
           method: 'DELETE',
+        credentials: 'include'
       })
       .then(() => this.fetchDashboard());
   };
 
   fetchDashboard(){
     let dashboard=[];
-      fetch('/api/page')
+      fetch('/api/page', {
+        method: 'GET',
+        credentials: 'include'
+    })
       .then(resp => resp.json())
-      .then(json => this.setState({dashboard:json}));
+      .then(json => this.setState({dashboard:json}))
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   componentDidMount(){
@@ -76,7 +83,7 @@ class Dashboard extends React.Component {
              </table>
            </div>
 
-           <Route exact path="/dashboard/new" render={()=><DashboardForm user={this.props.user} mode='Add' />} />
+           <Route exact path="/dashboard/new" render={(props)=><DashboardForm {...props} user={this.props.user} mode='Add' fetchDashboard={this.fetchDashboard} />} />
            <Route path="/dashboard/edit/:dashboardid" render={(props) => <DashboardForm {...props} mode='Edit' user={this.props.user} fetchDashboard={this.fetchDashboard} />} />
          </main>
   }
