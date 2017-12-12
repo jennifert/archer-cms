@@ -18,7 +18,7 @@ const PagesSchema = new mongoose.Schema({
     required: true,
   },
   content: {
-    type: Array,
+    type: String,
     required: true,
   },
   tags: {

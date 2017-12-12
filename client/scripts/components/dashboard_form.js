@@ -132,7 +132,6 @@ class DashboardForm extends React.Component {
       body: jsonBody
     })
     .then((res) => {
-      console.log(this.props);
       if (res.ok) {
         this.setState({ errors: null });
         this.props.fetchDashboard();
@@ -191,15 +190,44 @@ class DashboardForm extends React.Component {
   }
 
   render() {
-    // console.log("rendering");
     const { mode, user,fetchDashboard} = this.props;
-    let errorMessage = '';
+    let errors, errorTitle, errorCategory, errorTags, errorType, errorContent;
     if (this.state.errors){
-      // if (this.state.errors.errors.name.kind === 'required' ) {
-      //     errorMessage = "Field is required.";
-      // }
-      console.log(this.state.errors);
+      errors = this.state.errors.errors;
+      if (errors.title.kind==="required"){
+        errorTitle="Title is required";
+      } else {
+        errorTitle="";
+      }
+      if (errors.category.kind==="ObjectID"){
+        errorCategory="Category is required";
+      } else {
+        errorCategory="";
+      }
+      if (errors.tags.kind==="required"){
+        errorTags="Tags are required";
+      } else {
+        errorTags="";
+      }
+      if (errors.type.kind==="ObjectID"){
+        errorType="Content type is required";
+      } else {
+        errorType="";
+      }
+      if (errors.content.kind==="required"){
+        errorContent="Content is required,";
+      } else {
+        errorContent="";
+      }
     }
+    //
+    // console.log("errorTitle", errorTitle);
+    // console.log("errorCategory", errorCategory);
+    // console.log("errorTags", errorTags);
+    // console.log("errorType", errorType);
+    // console.log("errorType", errorType);
+    // console.log("errorContent", errorContent);
+    // console.log("errors", errors);
 
     return <div className="dashboard-form">
 
@@ -208,17 +236,17 @@ class DashboardForm extends React.Component {
         this.state.errors && <div className='error'>There were some errors saving your content!</div>
       }
       <form onSubmit={(event) => this.handleSubmit(event)}>
-        {
-          /*{
-          errorMessage && <div className='error'>{errorMessage}</div>
-            }
-         */
-        }
         <div className="row-one">
+          {
+            errorTitle && <div className='error'>{errorTitle}</div>
+          }
           <input type="text" name="title" id="title" placeholder="Enter your post or page title"
             value={this.state.title}
             onChange={(event) => this.handleInputChange(event) }  />
 
+            {
+              errorType && <div className='error'>{errorType}</div>
+            }
             <select name="currentType" value={this.state.currentType} onChange={(event) => this.handleInputChange(event) }>
               <option>-- select --</option>
               {this.state.typeChoose.map((option)=>{
@@ -227,9 +255,12 @@ class DashboardForm extends React.Component {
                  );
                })}
             </select>
+
         </div>
         <div className="row-two">
-
+          {
+            errorCategory && <div className='error'>{errorCategory}</div>
+          }
         <select name="currentCategory" value={this.state.currentCategory} onChange={(event) => this.handleInputChange(event) }>
           <option value="">-- select --</option>
           {this.state.category.map((option)=>{
@@ -238,6 +269,10 @@ class DashboardForm extends React.Component {
              );
            })}
         </select>
+
+        {
+          errorTags && <div className='error'>{errorTags}</div>
+        }
           {this.state.tags.map((tag)=>{
                return(
                  <label key={tag._id}>
@@ -250,9 +285,15 @@ class DashboardForm extends React.Component {
                      />
                   </label>
                );
-             })}
+             })
+           }
+
+
         </div>
         <div className="row-three">
+          {
+            errorContent && <div className='error'>{errorContent}</div>
+          }
             <Editor
               key={this.state.editId}
               initialValue={this.state.editorState}

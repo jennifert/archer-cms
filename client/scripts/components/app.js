@@ -74,7 +74,6 @@ class App extends React.Component {
                 <button className="logout" onClick={this.logout}>Logout</button>
                 <SideMenu />
                 <Route path="/dashboard" render={()=><Dashboard user={this.state.user} />} />
-                {/* TODO: See why refreshing after adding categories and tags fail */}
                 <Route path="/tags" render={()=><Tags user={this.state.user} />} />
                 <Route path="/categories" render={()=><Categories user={this.state.user} />} />
                 <Route exact path="/settings" render={()=><SiteSettings user={this.state.user} />} />

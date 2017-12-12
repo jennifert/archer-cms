@@ -9,22 +9,6 @@ const HeaderImage = require('./server/headers.js');
 
 mongoose.connect('mongodb://localhost/archercms');
 
-/*
-if time, replace below users with:
-User.register(newUser, req.body.password, (err, user) => {
-  if (err) {
-    res.send(err);
-  } else {
-    req.logIn(user, (err) => {
-      res.send(user);
-    });
-
-  }
-});
-then get user id and associate to initial items
-
-//Admin, editor, guest
- */
 user1 = new User({
     name: 'Jane Doe',
     email: 'jdoe@example.com'
