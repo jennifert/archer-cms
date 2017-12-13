@@ -23,13 +23,17 @@ class SiteSettings extends React.Component {
   deleteHeaderImage(id) {
       fetch(`/api/settings/header/${id}`, {
           method: 'DELETE',
+          credentials: 'include'
       })
       .then(() => this.fetchHeaderImages());
   };
 
   fetchHeaderImages(){
     let dashboard=[];
-      fetch('/api/settings/header/')
+      fetch('/api/settings/header/', {
+        method: 'GET',
+        credentials: 'include'
+      })
       .then(resp => resp.json())
       .then(json => this.setState({
         allheaderImages:json,
@@ -39,7 +43,10 @@ class SiteSettings extends React.Component {
 
   fetchEndPoints(){
     let dashboard=[];
-      fetch('/api/settings/endpoints')
+      fetch('/api/settings/endpoints', {
+        method: 'GET',
+        credentials: 'include'
+      })
       .then(resp => resp.json())
       .then(json => this.setState({endpoints:json}));
   }
@@ -60,6 +67,7 @@ class SiteSettings extends React.Component {
 
     fetch('/api/settings/header/', {
       method: 'post',
+      credentials: 'include'
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
