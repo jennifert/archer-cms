@@ -46,7 +46,7 @@ class Categories extends React.Component {
                Add new category
              </Link>
 
-             <table id="category-table">
+             <table className='table table-condensed table-hover table-responsive'>
                <thead>
                  <tr>
                     <th>Date</th>

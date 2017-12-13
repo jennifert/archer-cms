@@ -90,17 +90,20 @@ class CategoryForm extends React.Component {
 
       <h3>{ mode } Category</h3>
       {
-        this.state.errors && <div className='error'>There were some errors saving your category!</div>
+        this.state.errors && <div className="alert alert-danger" role="alert">There were some errors saving your category!</div>
       }
-      <form onSubmit={(event) => this.handleSubmit(event)}>
-      <input type="text" name="newCategory" id="newCategory"
-        placeholder="Enter the new category"
-        value={this.state.newCategory} onChange={(event) => this.handleInputChange(event) }
-        />
-        {
-          errorMessage && <div className='error'>{errorMessage}</div>
-        }
-        <button type="submit" id="btn-submit" name="btn-category">
+      <form onSubmit={(event) => this.handleSubmit(event)} className="form-inline">
+      {
+        errorMessage && <div className='error'>{errorMessage}</div>
+      }
+      <div className="form-group">
+        <label for="newCategory" className="sr-only">Name</label>
+        <input type="text" name="newCategory" id="newCategory"
+          placeholder="Enter the new category" className="form-control"
+          value={this.state.newCategory} onChange={(event) => this.handleInputChange(event) }
+          />
+      </div>
+        <button type="submit" id="btn-submit" className="btn btn-default" name="btn-category">
           <i className="fa fa-save" aria-hidden="true"></i>&nbsp;
           {mode}
         </button>

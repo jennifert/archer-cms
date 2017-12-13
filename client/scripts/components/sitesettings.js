@@ -67,7 +67,7 @@ class SiteSettings extends React.Component {
 
     fetch('/api/settings/header/', {
       method: 'post',
-      credentials: 'include'
+      credentials: 'include',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -94,6 +94,7 @@ class SiteSettings extends React.Component {
   }
 
   render() {
+    // console.log(this.state.allheaderImages);
     return <main className='settings'>
            <h1>Settings</h1>
            <div className="content">
@@ -107,8 +108,7 @@ class SiteSettings extends React.Component {
                    />
                </form>
 
-               <div className="table-data">
-                <table id="header-images">
+                <table className='table table-condensed table-hover table-responsive'>
                   <thead>
                     <tr>
                       <th>Date</th>
@@ -135,9 +135,6 @@ class SiteSettings extends React.Component {
                    })}
                   </tbody>
                 </table>
-               </div>
-
-                <div id="upload-status" />
              </div>
 
              <div className="api-calls">

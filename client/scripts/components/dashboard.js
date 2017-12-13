@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-// import NewContent from './newcontent.js';
-// import EditContent from './editcontent';
+import DashboardTable from './dashboard_table.js';
 import DashboardForm from './dashboard_form.js';
 
 class Dashboard extends React.Component {
@@ -12,28 +11,28 @@ class Dashboard extends React.Component {
           showResults: false,
       };
       this.fetchDashboard = this.fetchDashboard.bind(this);
-      this.deletePage = this.deletePage.bind(this);
+      // this.deletePage = this.deletePage.bind(this);
   }
 
-  deletePage(id) {
-      fetch(`/api/page/${id}`, {
-          method: 'DELETE',
-        credentials: 'include'
-      })
-      .then(() => this.fetchDashboard());
-  };
+  // deletePage(id) {
+  //     fetch(`/api/page/${id}`, {
+  //         method: 'DELETE',
+  //       credentials: 'include'
+  //     })
+  //     .then(() => this.fetchDashboard());
+  // };
 
   fetchDashboard(){
     let dashboard=[];
-      fetch('/api/page', {
-        method: 'GET',
-        credentials: 'include'
+    fetch('/api/page', {
+      method: 'GET',
+      credentials: 'include'
     })
-      .then(resp => resp.json())
-      .then(json => this.setState({dashboard:json}))
-      .catch((err) => {
-        console.log(err);
-      });
+    .then(resp => resp.json())
+    .then(json => this.setState({dashboard:json}))
+    .catch((err) => {
+      console.log(err);
+    });
   }
 
   componentDidMount(){
@@ -50,7 +49,7 @@ class Dashboard extends React.Component {
                 Add Post/Page
               </Link>
             </div>
-             <table className='dashboard-table'>
+             <table className='table table-condensed table-hover table-responsive'>
                <thead>
                  <tr>
                     <th>Last Edited</th>
@@ -62,23 +61,11 @@ class Dashboard extends React.Component {
                  </tr>
                </thead>
                  <tbody>
-                     {this.state.dashboard.map((rows)=>{
-                      return(
-                        <tr key={rows._id}>
-                          <td>{(new Date(rows.dateEdited)).toISOString().substring(0, 10)}</td>
-                          <td><Link to={`/dashboard/edit/${rows._id}`}>{rows.title}</Link></td>
-                          <td>{rows.user.name}</td>
-                          <td>{rows.category.name}</td>
-                          <td>{rows.type.name}</td>
-                          <td>
-                            <button className="page-delete" onClick={() => this.deletePage(rows._id)}>
-                              <i className='fa fa-trash'></i>&nbsp;
-                              Delete
-                            </button>
-                          </td>
-                        </tr>
-                      );
-                  })}
+                   {this.state.dashboard.map(dashboard => <DashboardTable key={ dashboard._id }
+                                                       onDelete={ this.fetchDashboard }
+                                                       {...dashboard}
+                                                       author={ this.props.user }
+                                                      />)}
                  </tbody>
              </table>
            </div>

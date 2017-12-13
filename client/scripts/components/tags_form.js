@@ -91,7 +91,7 @@ class TagForm extends React.Component {
 
       <h3>{ mode } Tag</h3>
       {
-        this.state.errors && <div className='error'>There were some errors saving your tag!</div>
+        this.state.errors && <div className="alert alert-danger" role="alert">There were some errors saving your tag!</div>
       }
       <form onSubmit={(event) => this.handleSubmit(event)}>
       <input type="text" name="newTag" id="newTag"

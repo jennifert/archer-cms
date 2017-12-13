@@ -233,7 +233,7 @@ class DashboardForm extends React.Component {
 
       <h3>{ mode } Content</h3>
       {
-        this.state.errors && <div className='error'>There were some errors saving your content!</div>
+        this.state.errors && <div className="alert alert-danger" role="alert">There were some errors saving your content!</div>
       }
       <form onSubmit={(event) => this.handleSubmit(event)}>
         <div className="row-one">

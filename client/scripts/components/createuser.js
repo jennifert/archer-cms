@@ -53,35 +53,43 @@ class CreateUser extends React.Component {
           <h2>Create User</h2>
 
           {
-            errorMessage && <div className='error'>{errorMessage}</div>
+            errorMessage && <div className="alert alert-danger" role="alert">{errorMessage}</div>
           }
 
-          <form onSubmit={this.handleSubmit} className="authentication-form">
-
-            <input
-              type="text"
-              name="name"
-              placeholder="Enter your name: "
-              value={this.state.name}
-              onChange={this.handleChange}
-            />
-
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter your email: "
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-
-            <input
-              type="password"
-              name="password"
-              placeholder="Enter your password: "
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-group">
+              <label for="name" className="sr-only">Name</label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Enter your name: "
+                className="form-control"
+                value={this.state.name}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label for="email" className="sr-only">Email address</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter your email: "
+                className="form-control"
+                value={this.state.email}
+                onChange={this.handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label for="password" className="sr-only">Password</label>
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter your password: "
+                className="form-control"
+                value={this.state.password}
+                onChange={this.handleChange}
+              />
+            </div>
             <button type="submit" id="btn-submit" name="createUserSubmit">
               <i className="fa fa-plus" aria-hidden="true"></i>&nbsp;
               Create User

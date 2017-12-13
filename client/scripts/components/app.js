@@ -10,7 +10,6 @@ import Dashboard from './dashboard.js';
 import SiteSettings from './sitesettings.js';
 import Tags from './tags.js';
 import Categories from './categories.js';
-import LogoImg from './logo';
 
 
 class App extends React.Component {
@@ -64,15 +63,17 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <div className="container-fluid">
-            <header>
-              <h1 className="centre-text">Archer CMS</h1>
-              <LogoImg imgClass="login-img" />
+        <div className="container">
+            <header className="cms-header">
+                <div className="cms-logo text-center"><img src="/logo.png" alt="Logo" className="img-rounded" /></div>
+                <h1 className="cms-title text-center">Archer CMS</h1>
+                {
+                  this.state.loggedIn && <SideMenu />
+                }
             </header>
             { this.state.loggedIn ?
               <article className="signed-in">
                 <button className="logout" onClick={this.logout}>Logout</button>
-                <SideMenu />
                 <Route path="/dashboard" render={()=><Dashboard user={this.state.user} />} />
                 <Route path="/tags" render={()=><Tags user={this.state.user} />} />
                 <Route path="/categories" render={()=><Categories user={this.state.user} />} />
@@ -80,10 +81,10 @@ class App extends React.Component {
               </article>
             :
               <div className="row">
-               <div className="col-6">
+               <div className="col-sm-6">
                  <CreateUser refresh={this.refresh} />
                </div>
-               <div className="col-6">
+               <div className="col-sm-6">
                  <LoginForm refresh={this.refresh} login={this.login} />
                </div>
               </div>

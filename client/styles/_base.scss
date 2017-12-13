@@ -1,43 +1,38 @@
-
+header{
+  width:100%;
+}
 .copyright{
+  margin-top: 20px;
   font-size: 10px;
   margin:0 auto;
   width: 100%;
   text-align: center;
 }
 
-.clearfix{
-  clear: both;
+.cms-logo img{
   border:0;
+  height:150px;
 }
 
-.pass{
-  color: #468847;
-  background-color: #dff0d8;
-  border-color: #d6e9c6;
+.navbar {
+  margin-bottom: 20px;
 }
 
-.fail{
-  color: #b94a48;
-  background-color: #f2dede;
-  border-color: #eed3d7;
+.errors, .error{
+  color: #ff0000;
 }
 
-.pass, .fail{
-  padding: 14px;
-  text-align: center;
+#btn-submit{
+  margin-left: 5px;
 }
 
-.input-error{
-  border: 1px solid #b94a48;
-  color: #b94a48;
-}
-.inline-form {
-  display:inline;
-  padding-right:10px;
-}
-
-.signed-in .home-img{
-  border: 0;
-  height:200px;
+@media (min-width: 768px) {
+  .navbar.navbar-default .navbar-nav {
+    width: 100%;
+    text-align: center;
+  }
+  .navbar.navbar-default .navbar-nav > li {
+    display: inline-block;
+    float: none
+  }
 }

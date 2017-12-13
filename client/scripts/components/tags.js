@@ -47,7 +47,7 @@ class Tags extends React.Component {
                Add new tag
              </Link>
 
-             <table id="tag-table">
+             <table className='table table-condensed table-hover table-responsive'>
                <thead>
                  <tr>
                     <th>Date</th>
