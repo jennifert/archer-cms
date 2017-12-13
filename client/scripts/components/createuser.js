@@ -7,6 +7,8 @@ class CreateUser extends React.Component {
           name: '',
           email: '',
           password: '',
+          isvalid: false,
+          issubmit: false,
       }
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -14,18 +16,27 @@ class CreateUser extends React.Component {
   handleSubmit(e) {
       e.preventDefault();
       const user = Object.assign({}, this.state);
-      fetch('/api/signup', {
-          method: 'POST',
-          credentials: 'include',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(user)
-      })
-      .then((res) => res.json())
-      .then((json) => {
-          this.props.refresh();
-      });
+      if (this.state.email && this.state.password){
+        fetch('/api/signup', {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user)
+        })
+        .then((res) => {
+          console.log(res);
+            if (res.ok) {
+              this.setState({ isvalid: true,issubmit:false });
+              this.props.refresh();
+            } else {
+              this.setState({ isvalid: false,issubmit:true });
+            }
+        });
+      } else {
+        this.setState({ isvalid: false,issubmit:true });
+      }
   }
   handleChange(e) {
       this.setState({
@@ -33,8 +44,18 @@ class CreateUser extends React.Component {
       });
   }
   render() {
+    let errorMessage;
+    if (this.state.issubmit=== true && this.state.isvalid===false){
+        errorMessage="Sorry, an error occured. All fields are required."
+    }
+    console.log(errorMessage);
     return <div className='create-user'>
           <h2>Create User</h2>
+
+          {
+            errorMessage && <div className='error'>{errorMessage}</div>
+          }
+
           <form onSubmit={this.handleSubmit} className="authentication-form">
 
             <input

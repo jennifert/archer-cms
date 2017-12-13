@@ -6,6 +6,8 @@ class LoginForm extends React.Component {
       this.state = {
           email: '',
           password: '',
+          isvalid: false,
+          issubmit: false,
       }
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -13,6 +15,7 @@ class LoginForm extends React.Component {
   handleSubmit(e) {
       e.preventDefault();
       const user = Object.assign({}, this.state);
+
       fetch('/api/login', {
           method: 'POST',
           headers: {
@@ -22,14 +25,12 @@ class LoginForm extends React.Component {
           body: JSON.stringify(user),
       })
       .then((res) => {
-          if (res.status !== 401) {
-              return res.json();
+          if (res.ok) {
+            this.setState({ isvalid: true,issubmit:false });
+            this.props.refresh();
           } else {
-              return console.log('Unauthorized');
+            this.setState({ isvalid: false,issubmit:true });
           }
-      })
-      .then((json) => {
-          this.props.refresh();
       });
 
   }
@@ -39,8 +40,18 @@ class LoginForm extends React.Component {
       });
   }
   render() {
+    let errorMessage;
+    if (this.state.issubmit=== true && this.state.isvalid===false){
+        errorMessage="Sorry, an error occured. Please check your fields are filled correctly and try again."
+    }
+    console.log(errorMessage);
     return <div className='login'>
       <h2>Login User</h2>
+
+      {
+        errorMessage && <div className='error'>{errorMessage}</div>
+      }
+      
       <form onSubmit={this.handleSubmit} className="authentication-form">
 
         <input
@@ -64,6 +75,9 @@ class LoginForm extends React.Component {
           Sign In
         </button>
       </form>
+      {
+        this.state.errors && <div className='error'>{this.state.errors}</div>
+      }
     </div>
   }
 
