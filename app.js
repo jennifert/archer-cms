@@ -357,7 +357,7 @@ app.post('/api/login', passport.authenticate('local'), (req, res) => {
 
 app.get('/api/me', (req, res) => {
   if (req.user) {
-    res.status(200).send(req.user)
+    res.status(200).send(req.user);
   } else {
     res.status(401).json({ message: "Unauthorized."});
   }
