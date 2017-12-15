@@ -19,6 +19,7 @@ class SideMenu extends React.Component {
                     <li><Link to="/categories">Categories</Link></li>
                     <li><Link to="/tags">Tags</Link></li>
                     <li><Link to="/settings">Settings</Link></li>
+                    <li><Link to="/types">Content Types</Link></li>
               </ul>
             </div>
           </div>

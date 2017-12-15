@@ -114,6 +114,48 @@ app.get('/api/type', requireLogin, (req, res, next) => {
   });
 });
 
+app.post('/api/type/', requireLogin, (req, res, next) => {
+  const contentType = new ContentType();
+  const cTypes = Object.assign(contentType, req.body);
+  cTypes.save((err, doc) => {
+      if (err) {
+          res
+              .status(422)
+              .send(err);
+              console.log(err);
+      } else {
+        res
+            .status(200)
+            .send(doc);
+      }
+  });
+});
+
+app.put('/api/type/:id', requireLogin, (req, res, next) => {
+  const model = req.body;
+  const content = ContentType.findById(req.params.id, (err, doc) => {
+      if (err) {
+          res
+              .status(500)
+              .send(err);
+      } else {
+          delete req.body._id;
+          const updatedType = Object.assign(doc, model);
+          updatedType.save((err, doc) => {
+              if (err) {
+                  res
+                      .status(500)
+                      .send(err);
+              } else {
+                  res
+                      .status(200)
+                      .send(doc);
+              }
+          });
+      }
+  });
+});
+
 app.get('/api/categories', requireLogin, (req, res, next) => {
   Categorie.find().populate('user').exec().then((categories) => {
     res.status(200).send(categories);

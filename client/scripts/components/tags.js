@@ -96,10 +96,6 @@ class Tags extends React.Component {
                  fetchTags={this.fetchTags} user={this.props.user} onChange={this.handleInputChange.bind(this)}
                />
              }
-             {/*
-             <Route exact path="/tags/add" render={(props)=><TagForm {...props} mode='Add' fetchTags={this.fetchTags} user={this.props.user} />} />
-             <Route path="/tags/edit/:tagid" render={(props) => <TagForm {...props} mode='Edit' fetchTags={this.fetchTags} user={this.props.user}/>} />
-             */}
            </div>
          </main>
   }

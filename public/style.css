@@ -21,7 +21,7 @@ header {
 #btn-submit {
   margin-left: 5px; }
 
-table a {
+table a, ul li a {
   cursor: pointer; }
 
 @media (min-width: 768px) {

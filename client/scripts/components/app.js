@@ -10,6 +10,7 @@ import Dashboard from './dashboard.js';
 import SiteSettings from './sitesettings.js';
 import Tags from './tags.js';
 import Categories from './categories.js';
+import ContentTypes from './types.js';
 
 
 class App extends React.Component {
@@ -78,6 +79,7 @@ class App extends React.Component {
                 <Route path="/tags" render={()=><Tags user={this.state.user} />} />
                 <Route path="/categories" render={()=><Categories user={this.state.user} />} />
                 <Route exact path="/settings" render={()=><SiteSettings user={this.state.user} />} />
+                <Route path="/types" render={()=><ContentTypes user={this.state.user} />} />
               </article>
             :
               <div className="row">

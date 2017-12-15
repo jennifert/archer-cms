@@ -1,6 +1,6 @@
 import React from 'react';
 
-class TagForm extends React.Component {
+class TypeForm extends React.Component {
   constructor(){
       super();
       this.state = {
@@ -14,10 +14,10 @@ class TagForm extends React.Component {
      let fetchURL = '';
      let fetchMethod='';
      if (this.props.mode=="Edit"){
-       fetchURL=`/api/tags/${this.props.tagId}`;
+       fetchURL=`/api/type/${this.props.typeId}`;
        fetchMethod='put';
      } else {
-        fetchURL="/api/tags/";
+        fetchURL="/api/type/";
         fetchMethod='post';
      }
     fetch (fetchURL, {
@@ -29,14 +29,14 @@ class TagForm extends React.Component {
       },
       body: JSON.stringify({
         date: new Date(),
-        name: this.props.tagName,
+        name: this.props.typeName,
         user: this.props.user
       })
     })
     .then((res) => {
       if (res.ok) {
         this.setState({ errors: null });
-        this.props.fetchTags();
+        this.props.fetchTypes();
       } else {
         res.json().then(errors => this.setState({ errors }));
       }
@@ -49,23 +49,23 @@ class TagForm extends React.Component {
 
   render() {
 
-    const { mode, user,tagId,fetchTags, tagName, handleInputChange} = this.props;
+    const { mode, user,typeId,fetchTypes, typeName, handleInputChange} = this.props;
     let errorMessage = '';
     if (this.state.errors){
       if (this.state.errors.errors.name.kind === 'required' ) {
           errorMessage = "Field is required.";
       }
     }
-    return <div className="tags-form">
+    return <div className="type-form">
 
-      <h3>{this.props.mode} Tag</h3>
+      <h3>{this.props.mode}</h3>
       {
         this.state.errors && <div className="alert alert-danger" role="alert">There were some errors saving your tag!</div>
       }
       <form onSubmit={(event) => this.handleSubmit(event)}>
-      <input type="text" name="tagName" id="tagName"
+      <input type="text" name="typeName" id="typeName"
         placeholder="Enter the new tag"
-        value={tagName} onChange={this.props.onChange}
+        value={typeName} onChange={this.props.onChange}
         />
         {
           errorMessage && <div className='error'>{errorMessage}</div>
@@ -79,4 +79,4 @@ class TagForm extends React.Component {
   }
 }
 
-export default TagForm;
+export default TypeForm;
