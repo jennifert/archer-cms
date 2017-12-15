@@ -236,80 +236,94 @@ class DashboardForm extends React.Component {
         this.state.errors && <div className="alert alert-danger" role="alert">There were some errors saving your content!</div>
       }
       <form onSubmit={(event) => this.handleSubmit(event)}>
-        <div className="row-one">
-          {
-            errorTitle && <div className='error'>{errorTitle}</div>
-          }
-          <input type="text" name="title" id="title" placeholder="Enter your post or page title"
-            value={this.state.title}
-            onChange={(event) => this.handleInputChange(event) }  />
-
+        <div className="row">
+          <div className="col-sm-6">
             {
-              errorType && <div className='error'>{errorType}</div>
+              errorTitle && <span className='error'>{errorTitle}</span>
             }
-            <select name="currentType" value={this.state.currentType} onChange={(event) => this.handleInputChange(event) }>
-              <option>-- select --</option>
-              {this.state.typeChoose.map((option)=>{
+            <div className="form-group">
+              <label htmlfor="title">Title</label>
+              <input type="text" name="title" id="title" placeholder="Enter your post or page title"
+                value={this.state.title} className="form-control"
+                onChange={(event) => this.handleInputChange(event) }  />
+            </div>
+          </div>
+          <div className="col-sm-6">
+              {
+                errorType && <div className='error'>{errorType}</div>
+              }
+            <div className="form-group">
+              <label htmlfor="currentType">Content Type</label>
+              <select id="currentType" name="currentType" className="form-control" value={this.state.currentType} onChange={(event) => this.handleInputChange(event) }>
+                <option>-- select --</option>
+                {this.state.typeChoose.map((option)=>{
+                   return(
+                     <option key={option._id} value={option._id}>{option.name}</option>
+                   );
+                 })}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-sm-6">
+            {
+              errorCategory && <div className='error'>{errorCategory}</div>
+            }
+            <div className="form-group">
+              <label htmlfor="currentCategory">Category</label>
+            <select className="form-control" id="currentCategory" name="currentCategory" value={this.state.currentCategory} onChange={(event) => this.handleInputChange(event) }>
+              <option value="">-- select --</option>
+              {this.state.category.map((option)=>{
                  return(
                    <option key={option._id} value={option._id}>{option.name}</option>
                  );
                })}
             </select>
-
-        </div>
-        <div className="row-two">
+            </div>
+          </div>
+          <div className="col-sm-6">
           {
-            errorCategory && <div className='error'>{errorCategory}</div>
+            errorTags && <div className='error'>{errorTags}</div>
           }
-        <select name="currentCategory" value={this.state.currentCategory} onChange={(event) => this.handleInputChange(event) }>
-          <option value="">-- select --</option>
-          {this.state.category.map((option)=>{
-             return(
-               <option key={option._id} value={option._id}>{option.name}</option>
-             );
-           })}
-        </select>
-
-        {
-          errorTags && <div className='error'>{errorTags}</div>
-        }
-          {this.state.tags.map((tag)=>{
-               return(
-                 <label key={tag._id}>
-                   {tag.name}
-                    <input
-                      name={tag._id}
-                      type="checkbox"
-                      checked={this.state.newTags[tag._id]}
-                      onChange={(event) => this.handleInputChange(event) }
-                     />
-                  </label>
-               );
-             })
-           }
-
-
+                {this.state.tags.map((tag)=>{
+                     return(
+                       <label key={tag._id} className="tag-checks">
+                         {tag.name}&nbsp;
+                          <input
+                            name={tag._id}
+                            type="checkbox"
+                            checked={this.state.newTags[tag._id]}
+                            onChange={(event) => this.handleInputChange(event) }
+                           />
+                        </label>
+                     );
+                   })
+                 }
+          </div>
         </div>
-        <div className="row-three">
-          {
-            errorContent && <div className='error'>{errorContent}</div>
-          }
-            <Editor
-              key={this.state.editId}
-              initialValue={this.state.editorState}
-              init={{
-                plugins: 'link lists code',
-                toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
-              }}
-              onChange={this.handleEditorChange}
-            />
+        <div className="row">
+          <div className="col-sm-12">
+            {
+              errorContent && <div className='error'>{errorContent}</div>
+            }
+            <div className="form-group">
+              <Editor
+                key={this.state.editId}
+                initialValue={this.state.editorState}
+                init={{
+                  plugins: 'link lists code',
+                  toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+                }}
+                onChange={this.handleEditorChange}
+              />
+            </div>
+          </div>
         </div>
-        <div className="row-four">
-          <button type="submit" id="btn-submit" name="Submit">
-            <i className="fa fa-save" aria-hidden="true"></i>&nbsp;
-            {mode}
-          </button>
-        </div>
+        <button type="submit" id="btn-submit" name="Submit">
+          <i className="fa fa-save" aria-hidden="true"></i>&nbsp;
+          {mode}
+        </button>
       </form>
     </div>
   }

@@ -26,6 +26,11 @@ header{
   margin-left: 5px;
 }
 
+table a{
+  cursor: pointer;
+}
+
+
 @media (min-width: 768px) {
   .navbar.navbar-default .navbar-nav {
     width: 100%;

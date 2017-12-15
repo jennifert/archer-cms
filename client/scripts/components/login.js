@@ -44,7 +44,7 @@ class LoginForm extends React.Component {
     if (this.state.issubmit=== true && this.state.isvalid===false){
         errorMessage="Sorry, an error occured. Please check your fields are filled correctly and try again."
     }
-    console.log(errorMessage);
+    // console.log(errorMessage);
     return <div className='login'>
       <h2>Login User</h2>
 
@@ -55,7 +55,7 @@ class LoginForm extends React.Component {
       <form onSubmit={this.handleSubmit}>
 
         <div className="form-group">
-          <label for="email" className="sr-only">Email address</label>
+          <label htmlFor="email" className="sr-only">Email address</label>
           <input
             type="email"
             name="email"
@@ -66,7 +66,7 @@ class LoginForm extends React.Component {
           />
         </div>
         <div className="form-group">
-          <label for="password" className="sr-only">Password</label>
+          <label htmlFor="password" className="sr-only">Password</label>
           <input
             type="password"
             name="password"

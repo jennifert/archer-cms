@@ -326,7 +326,7 @@ const json = `[{
 "_id": 7,
 "route": "/api/settings/endpoints",
 "type": "GET",
-"purpose": "Displays a list od end points"
+"purpose": "Displays a list of end points"
 }]`;
   res.status(200).send(json);
 });

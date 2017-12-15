@@ -21,6 +21,9 @@ header {
 #btn-submit {
   margin-left: 5px; }
 
+table a {
+  cursor: pointer; }
+
 @media (min-width: 768px) {
   .navbar.navbar-default .navbar-nav {
     width: 100%;
@@ -28,6 +31,10 @@ header {
   .navbar.navbar-default .navbar-nav > li {
     display: inline-block;
     float: none; } }
+
+.tag-checks {
+  font-weight: normal;
+  padding-right: 15px; }
 
 .settings .table-data {
   margin-top: 20px;

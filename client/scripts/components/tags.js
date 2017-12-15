@@ -7,9 +7,18 @@ class Tags extends React.Component {
       super();
       this.state = {
           tags: [],
+          tagId:'',
+          mode:'',
       };
       this.fetchTags = this.fetchTags.bind(this);
       this.deleteTags = this.deleteTags.bind(this);
+      this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleInputChange(e) {
+     this.setState({
+          [e.target.name]: e.target.value,
+     });
   }
 
   deleteTags(id) {
@@ -30,6 +39,15 @@ class Tags extends React.Component {
       .then(json => this.setState({ tags:json }));
   }
 
+  openTagForm(mode, tagId, tagName) {
+    console.log('OPENING FORM: ', mode, tagId, tagName);
+    this.setState({
+      tagMode: mode,
+      tagId: tagId,
+      tagName: tagName,
+    });
+  }
+
   componentWillMount(){
    this.fetchTags();
   }
@@ -41,11 +59,10 @@ class Tags extends React.Component {
            <h1>Tags</h1>
 
            <div className="content">
-
-             <Link to="/tags/add">
+             <button className="tag-add" onClick={() => this.openTagForm('Add','','')}>
                <i className="fa fa-plus" aria-hidden="true"></i>&nbsp;
                Add new tag
-             </Link>
+             </button>
 
              <table className='table table-condensed table-hover table-responsive'>
                <thead>
@@ -61,7 +78,7 @@ class Tags extends React.Component {
                       return(
                         <tr key={rows._id}>
                           <td>{(new Date(rows.date)).toISOString().substring(0, 10)}</td>
-                          <td><Link to={`/tags/edit/${rows._id}`}>{rows.name}</Link></td>
+                          <td><a onClick={() => this.openTagForm('Edit', rows._id,rows.name)}>{rows.name}</a></td>
                           <td>{rows.user.name}</td>
                           <td>
                             <button className="tag-delete" onClick={() => this.deleteTags(rows._id)}>
@@ -74,8 +91,15 @@ class Tags extends React.Component {
                   })}
                  </tbody>
              </table>
+             { (this.state.tagId || this.state.tagMode === 'Add') &&
+               <TagForm tagId={this.state.tagId} tagName={this.state.tagName} mode={this.state.tagMode}
+                 fetchTags={this.fetchTags} user={this.props.user} onChange={this.handleInputChange.bind(this)}
+               />
+             }
+             {/*
              <Route exact path="/tags/add" render={(props)=><TagForm {...props} mode='Add' fetchTags={this.fetchTags} user={this.props.user} />} />
              <Route path="/tags/edit/:tagid" render={(props) => <TagForm {...props} mode='Edit' fetchTags={this.fetchTags} user={this.props.user}/>} />
+             */}
            </div>
          </main>
   }

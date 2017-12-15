@@ -73,7 +73,7 @@ class App extends React.Component {
             </header>
             { this.state.loggedIn ?
               <article className="signed-in">
-                <button className="logout" onClick={this.logout}>Logout</button>
+                <button className="btn btn-default" onClick={this.logout}>Logout</button>
                 <Route path="/dashboard" render={()=><Dashboard user={this.state.user} />} />
                 <Route path="/tags" render={()=><Tags user={this.state.user} />} />
                 <Route path="/categories" render={()=><Categories user={this.state.user} />} />

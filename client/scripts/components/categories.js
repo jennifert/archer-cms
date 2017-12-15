@@ -7,9 +7,18 @@ class Categories extends React.Component {
       super();
       this.state = {
         categories:[],
+        tagId:'',
+        mode:'',
       };
       this.fetchCategories = this.fetchCategories.bind(this);
       this.deleteCategory = this.deleteCategory.bind(this);
+      this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleInputChange(e) {
+     this.setState({
+          [e.target.name]: e.target.value,
+     });
   }
 
   deleteCategory(id) {
@@ -30,6 +39,15 @@ class Categories extends React.Component {
       .then(json => this.setState({ categories:json }));
   }
 
+  openCategoryForm(mode, categoryId, categoryName) {
+    console.log('OPENING FORM: ', mode, categoryId, categoryName);
+    this.setState({
+      categoryMode: mode,
+      categoryId: categoryId,
+      categoryName: categoryName,
+    });
+  }
+
   componentWillMount(){
    this.fetchCategories();
   }
@@ -41,10 +59,14 @@ class Categories extends React.Component {
 
            <div className="content">
 
-             <Link to="/categories/add">
+             {/* <Link to="/categories/add">
                <i className="fa fa-plus" aria-hidden="true"></i>&nbsp;
                Add new category
-             </Link>
+             </Link> */}
+            <button className="category-add" onClick={() => this.openCategoryForm('Add','','')}>
+              <i className="fa fa-plus" aria-hidden="true"></i>&nbsp;
+              Add new category
+             </button>
 
              <table className='table table-condensed table-hover table-responsive'>
                <thead>
@@ -60,7 +82,9 @@ class Categories extends React.Component {
                       return(
                         <tr key={rows._id}>
                           <td>{(new Date(rows.date)).toISOString().substring(0, 10)}</td>
-                          <td><Link to={`/categories/edit/${rows._id}`}>{rows.name}</Link></td>
+                          {/* <td><Link to={`/categories/edit/${rows._id}`}>{rows.name}</Link></td> */}
+
+                          <td><a onClick={() => this.openCategoryForm('Edit', rows._id,rows.name)}>{rows.name}</a></td>
                           <td>{rows.user.name}</td>
                           <td>
                             <button className="category-delete" onClick={() => this.deleteCategory(rows._id)}>
@@ -73,8 +97,13 @@ class Categories extends React.Component {
                   })}
                  </tbody>
              </table>
-               <Route exact path="/categories/add" render={(props)=><CategoryForm {...props} mode='Add' fetchCategories={this.fetchCategories} user={this.props.user} />} />
-               <Route path="/categories/edit/:categoryid" render={(props) => <CategoryForm {...props} mode='Edit' fetchCategories={this.fetchCategories} user={this.props.user}/>} />
+             { (this.state.categoryId || this.state.categoryMode === 'Add') &&
+               <CategoryForm categoryId={this.state.categoryId} categoryName={this.state.categoryName} mode={this.state.categoryMode}
+                 fetchCategories={this.fetchCategories} user={this.props.user} onChange={this.handleInputChange.bind(this)}
+               />
+             }
+               {/* <Route exact path="/categories/add" render={(props)=><CategoryForm {...props} mode='Add' fetchCategories={this.fetchCategories} user={this.props.user} />} />
+               <Route path="/categories/edit/:categoryid" render={(props) => <CategoryForm {...props} mode='Edit' fetchCategories={this.fetchCategories} user={this.props.user}/>} /> */}
            </div>
          </main>
   }

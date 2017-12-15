@@ -26,7 +26,7 @@ class CreateUser extends React.Component {
             body: JSON.stringify(user)
         })
         .then((res) => {
-          console.log(res);
+          // console.log(res);
             if (res.ok) {
               this.setState({ isvalid: true,issubmit:false });
               this.props.refresh();
@@ -48,7 +48,7 @@ class CreateUser extends React.Component {
     if (this.state.issubmit=== true && this.state.isvalid===false){
         errorMessage="Sorry, an error occured. All fields are required."
     }
-    console.log(errorMessage);
+    // console.log(errorMessage);
     return <div className='create-user'>
           <h2>Create User</h2>
 
@@ -58,7 +58,7 @@ class CreateUser extends React.Component {
 
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">
-              <label for="name" className="sr-only">Name</label>
+              <label htmlFor="name" className="sr-only">Name</label>
               <input
                 type="text"
                 name="name"
@@ -69,7 +69,7 @@ class CreateUser extends React.Component {
               />
             </div>
             <div className="form-group">
-              <label for="email" className="sr-only">Email address</label>
+              <label htmlFor="email" className="sr-only">Email address</label>
               <input
                 type="email"
                 name="email"
@@ -80,7 +80,7 @@ class CreateUser extends React.Component {
               />
             </div>
             <div className="form-group">
-              <label for="password" className="sr-only">Password</label>
+              <label htmlFor="password" className="sr-only">Password</label>
               <input
                 type="password"
                 name="password"
