@@ -90,7 +90,7 @@ class CreateUser extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
-            <button type="submit" id="btn-submit" name="createUserSubmit">
+            <button type="submit" id="btn-submit-create" name="createUserSubmit">
               <i className="fa fa-plus" aria-hidden="true"></i>&nbsp;
               Create User
             </button>

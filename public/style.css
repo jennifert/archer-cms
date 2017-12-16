@@ -24,6 +24,10 @@ header {
 table a, ul li a {
   cursor: pointer; }
 
+.table-types {
+  width: 40%;
+  margin: 0 auto; }
+
 @media (min-width: 768px) {
   .navbar.navbar-default .navbar-nav {
     width: 100%;

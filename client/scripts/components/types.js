@@ -61,22 +61,32 @@ class ContentTypes extends React.Component {
            <div className="content">
              <button className="type-add" onClick={() => this.openTypeForm('Add','','')}>
                <i className="fa fa-plus" aria-hidden="true"></i>&nbsp;
-               Add new contet type
+               Add new content type
              </button>
 
-             <ul>
+             <table className='table table-condensed table-hover table-responsive table-types'>
+               <thead>
+                 <tr>
+                    <th>Name</th>
+                    <th>Action</th>
+                 </tr>
+               </thead>
+                 <tbody>
                      {this.state.types.map((rows)=>{
                       return(
-                        <li key={rows._id}>
-                          <p><a onClick={() => this.openTypeForm('Edit', rows._id,rows.name)}>{rows.name}</a>:
-                            <a onClick={() => this.deleteTypes(rows._id)}>
+                        <tr key={rows._id}>
+                          <td><a onClick={() => this.openTypeForm('Edit', rows._id,rows.name)}>{rows.name}</a></td>
+                          <td>
+                            <button className="tag-delete" onClick={() => this.deleteTypes(rows._id)}>
                               <i className='fa fa-trash'></i>&nbsp;
                               Delete
-                            </a></p>
-                        </li>
+                            </button>
+                          </td>
+                        </tr>
                       );
                   })}
-              </ul>
+                </tbody>
+            </table>
              { (this.state.typeId || this.state.typeMode === 'Add') &&
                <TypeForm typeId={this.state.typeId} typeName={this.state.typeName} mode={this.state.typeMode}
                  fetchTypes={this.fetchTypes} user={this.props.user} onChange={this.handleInputChange.bind(this)}

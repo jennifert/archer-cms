@@ -77,7 +77,7 @@ class LoginForm extends React.Component {
           />
         </div>
 
-        <button type="submit" id="btn-submit" name="loginSubmit">
+        <button type="submit" id="btn-submit-login" name="loginSubmit">
           <i className="fa fa-sign-in" aria-hidden="true"></i>&nbsp;
           Sign In
         </button>
