@@ -18,6 +18,7 @@ class DashboardForm extends React.Component {
         editorState:'',
         thepages: '',
         editId:'',
+        currentID:null,
       };
 
       this.handleEditorChange = this.handleEditorChange.bind(this);
@@ -184,12 +185,17 @@ class DashboardForm extends React.Component {
     }
   }
   componentWillReceiveProps(nextProps){
-    if (this.props.match.params.dashboardid !== nextProps.match.params.dashboardid) {
-      this.fetchThePages();
-    }
+    // console.log('componentWillReceiveProps start');
+    // if (this.props.match.params.dashboardid !== nextProps.match.params.dashboardid) {
+    //   this.fetchThePages();
+    // } else {
+    //   console.log('in the if');
+    // }
+    this.fetchThePages();
   }
 
   render() {
+    // console.log("id",this.props.match.params.dashboardid);
     const { mode, user,fetchDashboard} = this.props;
     let errors, errorTitle, errorCategory, errorTags, errorType, errorContent;
     if (this.state.errors){
@@ -242,7 +248,7 @@ class DashboardForm extends React.Component {
               errorTitle && <span className='error'>{errorTitle}</span>
             }
             <div className="form-group">
-              <label htmlfor="title">Title</label>
+              <label htmlFor="title">Title</label>
               <input type="text" name="title" id="title" placeholder="Enter your post or page title"
                 value={this.state.title} className="form-control"
                 onChange={(event) => this.handleInputChange(event) }  />
@@ -253,7 +259,7 @@ class DashboardForm extends React.Component {
                 errorType && <div className='error'>{errorType}</div>
               }
             <div className="form-group">
-              <label htmlfor="currentType">Content Type</label>
+              <label htmlFor="currentType">Content Type</label>
               <select id="currentType" name="currentType" className="form-control" value={this.state.currentType} onChange={(event) => this.handleInputChange(event) }>
                 <option>-- select --</option>
                 {this.state.typeChoose.map((option)=>{
@@ -271,7 +277,7 @@ class DashboardForm extends React.Component {
               errorCategory && <div className='error'>{errorCategory}</div>
             }
             <div className="form-group">
-              <label htmlfor="currentCategory">Category</label>
+              <label htmlFor="currentCategory">Category</label>
             <select className="form-control" id="currentCategory" name="currentCategory" value={this.state.currentCategory} onChange={(event) => this.handleInputChange(event) }>
               <option value="">-- select --</option>
               {this.state.category.map((option)=>{
