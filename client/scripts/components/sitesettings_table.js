@@ -6,7 +6,7 @@ const SettingsHeaderTable = ({_id, dateSaved, headerUrl, user, onDelete, whoami}
   // console.log('author:',author);
   const deleteImage = (e) => {
     e.preventDefault();
-    fetch(`/api/page/${_id}`, { method: 'DELETE', credentials: 'include'})
+    fetch(`/api/settings/header/${_id}`, { method: 'DELETE', credentials: 'include'})
     .then(res => onDelete());
   }
 
