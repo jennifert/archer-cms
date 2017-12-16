@@ -97,7 +97,7 @@ class CategoryForm extends React.Component {
         errorMessage && <div className='error'>{errorMessage}</div>
       }
       <div className="form-group">
-        {/*<label htmlfor="categoryName" className="sr-only">Name</label>
+        {/*<label htmlFor="categoryName" className="sr-only">Name</label>
          <input type="text" name="categoryName" id="categoryName"
           placeholder="Enter the new category" className="form-control"
           value={this.props.categoryName}  onChange={this.props.onChange} }
