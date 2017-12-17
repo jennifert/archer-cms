@@ -1,5 +1,6 @@
 import React from 'react';
 // import ReactDOM from 'react-dom';
+// this is a bug where you need to hit the title in dashboard twice before the entire state refreshes.
 import { Editor } from '@tinymce/tinymce-react';
 
 class DashboardForm extends React.Component {
