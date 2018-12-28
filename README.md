@@ -13,4 +13,4 @@ NodeJs with NPM
 4) run node import.js
 
 ## Notes:
-Please not ethis app is still in dvelopment and NOT production ready.
+Please note this app is NOT production ready.
