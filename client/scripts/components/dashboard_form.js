@@ -1,5 +1,4 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 import { Editor } from '@tinymce/tinymce-react';
 
 class DashboardForm extends React.Component {
@@ -34,7 +33,6 @@ class DashboardForm extends React.Component {
   }
 
   fetchThePages(){
-    // this is a bug where you need to hit the title in dashboard twice before the entire state refreshes.
     let thepages='';
       fetch(`/api/page/${this.props.match.params.dashboardid}`, {
         method: 'GET',
@@ -186,17 +184,13 @@ class DashboardForm extends React.Component {
     }
   }
   componentWillReceiveProps(nextProps){
-    // console.log('componentWillReceiveProps start');
-    // if (this.props.match.params.dashboardid !== nextProps.match.params.dashboardid) {
-    //   this.fetchThePages();
-    // } else {
-    //   console.log('in the if');
-    // }
     this.fetchThePages();
+    if (this.props.match.params.dashboardid !== nextProps.match.params.dashboardid) {
+      window.location.reload();
+    }
   }
 
   render() {
-    // console.log("id",this.props.match.params.dashboardid);
     const { mode, user,fetchDashboard} = this.props;
     let errors, errorTitle, errorCategory, errorTags, errorType, errorContent;
     if (this.state.errors){
@@ -227,14 +221,6 @@ class DashboardForm extends React.Component {
         errorContent="";
       }
     }
-    //
-    // console.log("errorTitle", errorTitle);
-    // console.log("errorCategory", errorCategory);
-    // console.log("errorTags", errorTags);
-    // console.log("errorType", errorType);
-    // console.log("errorType", errorType);
-    // console.log("errorContent", errorContent);
-    // console.log("errors", errors);
 
     return <div className="dashboard-form">
 
