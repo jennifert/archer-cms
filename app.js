@@ -8,11 +8,11 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
 
+mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGODB_SERVER, {
     useMongoClient: true,
 });
-// mongoose.connect(process.env.MONGODB_SERVER);
-//TODO: Spilt into smaller files
+
 //data schemas
 const User = require('./server/users.js');
 // const Role = require('./server/roles.js');
@@ -23,7 +23,6 @@ const Tag = require('./server/tags.js');
 const HeaderImage = require('./server/headers.js');
 
 //start auth
-//TODO: Move logins to be required. One require for non-signed in users, the other for signed in users.
 passport.use(User.createStrategy());
 app.use(bodyParser.json());
 app.use(session({ secret: process.env.COOKIE_SERCRET, resave: false, saveUninitialized: true }));
@@ -31,7 +30,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
 
 //start rest of stuff.
 app.use(express.static('public'));

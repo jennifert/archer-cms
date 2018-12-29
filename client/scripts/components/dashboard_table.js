@@ -2,8 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const DashboardTable = ({_id, dateEdited, title, category, type, onDelete, user, author}) => {
-  // console.log('user:',user);
-  // console.log('author:',author);
+
   const deletePage = (e) => {
     e.preventDefault();
     fetch(`/api/page/${_id}`, { method: 'DELETE', credentials: 'include'})

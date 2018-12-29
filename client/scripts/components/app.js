@@ -66,7 +66,7 @@ class App extends React.Component {
       <Router>
         <div className="container">
             <header className="cms-header">
-                <div className="cms-logo text-center"><img src="/logo.png" alt="Logo" className="img-rounded" /></div>
+                <div className="cms-logo text-center"><img src="https://jenntesolin.nyc3.digitaloceanspaces.com/archer-cms/archer-image.png" alt="Bow and arrow" className="img-rounded" /></div>
                 <h1 className="cms-title text-center">Archer CMS</h1>
                 {
                   this.state.loggedIn && <SideMenu />
