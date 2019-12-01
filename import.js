@@ -7,7 +7,15 @@ const Categorie = require('./server/categories.js');
 const Tag = require('./server/tags.js');
 const HeaderImage = require('./server/headers.js');
 
-mongoose.connect('mongodb://localhost/archercms');
+
+mongoose.connect(process.env.MONGODB_SERVER, {
+useUnifiedTopology: true,
+useNewUrlParser: true,
+})
+.then(() => console.log('DB Connected!'))
+.catch(err => {
+console.log(err.message);
+});
 
 user1 = new User({
     name: 'Jane Doe',
@@ -85,34 +93,37 @@ image3 = new HeaderImage({
   user: user2
 });
 
-User.remove().then(() => {
+User.deleteMany().then(() => {
   user1.save();
   user2.save();
 });
 
-HeaderImage.remove().then(() => {
+HeaderImage.deleteMany().then(() => {
   image1.save();
   image2.save();
   image3.save();
 });
 
-ContentType.remove().then(() => {
+ContentType.deleteMany().then(() => {
   type1.save();
   type2.save();
 });
 
-Categorie.remove().then(() => {
+Categorie.deleteMany().then(() => {
   category1.save();
   category2.save();
 });
 
-Tag.remove().then(() => {
+Tag.deleteMany().then(() => {
   tag1.save();
   tag2.save();
   tag3.save();
 });
 
-Page.remove().then(() => {
+Page.deleteMany().then(() => {
   // page1.save();
   // page2.save();
 });
+
+console.log('Import Complete.');
+process.exit();

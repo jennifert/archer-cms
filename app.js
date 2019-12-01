@@ -8,9 +8,13 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
 
-mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGODB_SERVER, {
-    useMongoClient: true,
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  })
+  .then(() => console.log('Running app...'))
+  .catch(err => {
+  console.log(err.message);
 });
 
 //data schemas
