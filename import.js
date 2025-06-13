@@ -1,129 +1,128 @@
-const mongoose = require('mongoose');
-const User = require('./server/users.js');
-// const Role = require('./server/roles.js');
-const ContentType = require('./server/content_types.js');
-const Page = require('./server/pages_posts.js');
-const Categorie = require('./server/categories.js');
-const Tag = require('./server/tags.js');
-const HeaderImage = require('./server/headers.js');
+import dotenv from 'dotenv';
+dotenv.config();
+
+import fs from 'fs';
+import path from 'path';
+import readline from 'readline';
+import models from './server/models/index.js';
+
+const {
+    User, ContentType, Tag, Category, Page, HeaderImage, sequelize
+} = models;
+
+const isDev = process.env.NODE_ENV !== 'production';
+const args = process.argv.slice(2);
+const dbPath = path.resolve('./db.sqlite');
+const backupPath = path.resolve('./db.backup.sqlite');
+
+const confirm = (question) => {
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+
+    return new Promise((resolve) => {
+        rl.question(question, (answer) => {
+            rl.close();
+            resolve(answer.trim().toLowerCase());
+        });
+    });
+};
+
+const seed = async () => {
+    try {
+        if (!isDev) {
+            console.log('❌ Refusing to run this script in production.');
+            return process.exit(1);
+        }
+
+        if (!args.includes('--force')) {
+            const answer = await confirm('⚠️ This will DELETE all existing data. Type "yes" to continue: ');
+            if (answer !== 'yes') {
+                console.log('🛑 Seed aborted by user.');
+                return process.exit(0);
+            }
+        }
+
+        if (fs.existsSync(dbPath)) {
+            fs.copyFileSync(dbPath, backupPath);
+            console.log('📦 Backup created at db.backup.sqlite');
+        }
+
+        await sequelize.sync({ force: true });
+        console.log('💥 Database wiped and synced');
+
+        const user1 = await User.create({
+            name: 'Jane Doe',
+            email: 'jdoe@example.com',
+            password: 'password123',
+            role: 'admin'
+        });
+
+        const user2 = await User.create({
+            name: 'Joe Smith',
+            email: 'jsmith@example.com',
+            password: 'password123',
+            role: 'author'
+        });
+
+        const type1 = await ContentType.create({ name: 'post' });
+        const type2 = await ContentType.create({ name: 'page' });
+
+        const category1 = await Category.create({
+            name: 'JavaScript',
+            date: new Date(),
+            UserId: user1.id
+        });
+
+        const category2 = await Category.create({
+            name: 'PHP',
+            date: new Date(),
+            UserId: user2.id
+        });
+
+        const tag1 = await Tag.create({ name: 'React', date: new Date(), UserId: user1.id });
+        const tag2 = await Tag.create({ name: 'Vanilla', date: new Date(), UserId: user1.id });
+        const tag3 = await Tag.create({ name: 'jQuery', date: new Date(), UserId: user2.id });
 
 
-mongoose.connect(process.env.MONGODB_SERVER, {
-useUnifiedTopology: true,
-useNewUrlParser: true,
-})
-.then(() => console.log('DB Connected!'))
-.catch(err => {
-console.log(err.message);
-});
+        const sampleSource = path.resolve('./seed_assets/sample1.jpg');
+        const sampleDest = path.resolve('./public/images/sample1.jpg');
 
-user1 = new User({
-    name: 'Jane Doe',
-    email: 'jdoe@example.com'
-});
-user2 = new User({
-    name: 'Joe Smith',
-    email: 'jsmith@example.com'
-});
+        if (!fs.existsSync('./public/images')) {
+            fs.mkdirSync('./public/images', { recursive: true });
+        }
+        fs.copyFileSync(sampleSource, sampleDest);
+        console.log('🖼️ Copied sample1.jpg to public/images/');
 
-type1 = new ContentType({name: 'post'});
-type2 = new ContentType({name: 'page'});
 
-category1 = new Categorie({
-  date: new Date(),
-  name: "JavaScript",
-  user: user1
-});
-category2 = new Categorie({
-  date: new Date(),
-  name: "PHP",
-  user: user2
-});
+        await HeaderImage.create({
+            filename: 'sample1.jpg',
+            mimetype: 'image/jpeg',
+            dateSaved: new Date(),
+            UserId: user1.id
+        });
 
-tag1 = new Tag({
-  date: new Date(),
-  name: "React",
-  user: user1
-});
-tag2 = new Tag({
-  date: new Date(),
-  name: "Vanilla",
-  user: user1
-});
-tag3 = new Tag({
-  date: new Date(),
-  name: "jQuery",
-  user: user2
-});
+        const testPage = await Page.create({
+        title: 'Welcome to Archer CMS',
+        content: 'This is a test post created by the seeder.',
+        dateCreated: new Date(),
+        dateEdited: new Date(),
+        published: true,
+        UserId: user1.id,
+        CategoryId: category1.id,
+        ContentTypeId: type1.id
+        });
 
-// page1 = new Page({
-//   title: 'Test Post',
-//   user: user1,
-//   dateCreated: new Date(),
-//   dateEdited: new Date(),//for testing only
-//   content: ['Good Bye world'],
-//   tags: [tag1._id],
-//   category: category1._id,
-//   type: type1._id,
-// });
-// page2 = new Page({
-//   title: 'Test page',
-//   user: user2,
-//   dateCreated: new Date(),
-//   dateEdited: new Date(),//for testing only
-//   content: ['Hello world'],
-//   tags: [tag3._id],
-//   category: category2._id,
-//   type: type2._id,
-// });
+        await testPage.setTags([tag1, tag2]);
 
-image1 = new HeaderImage({
-  dateSaved: new Date(),
-  headerUrl: "https://jenntesolin.com/imgs/mayan_ruins.jpg",
-  user: user1
-});
-image2 = new HeaderImage({
-  dateSaved: new Date(),
-  headerUrl: "https://jenntesolin.com/imgs/tall_ship.jpg",
-  user: user1
-});
-image3 = new HeaderImage({
-  dateSaved: new Date(),
-  headerUrl: "https://jenntesolin.com/imgs/peace_arc.jpg",
-  user: user2
-});
+        console.log('✅ Dev seed complete.');
+        process.exit(0);
 
-User.deleteMany().then(() => {
-  user1.save();
-  user2.save();
-});
+    } catch (err) {
+        console.error('❌ Seed failed:', err.message);
+        process.exit(1);
+    }
+};
 
-HeaderImage.deleteMany().then(() => {
-  image1.save();
-  image2.save();
-  image3.save();
-});
-
-ContentType.deleteMany().then(() => {
-  type1.save();
-  type2.save();
-});
-
-Categorie.deleteMany().then(() => {
-  category1.save();
-  category2.save();
-});
-
-Tag.deleteMany().then(() => {
-  tag1.save();
-  tag2.save();
-  tag3.save();
-});
-
-Page.deleteMany().then(() => {
-  // page1.save();
-  // page2.save();
-});
-
-console.log('Import Complete.');
-process.exit();
+seed();

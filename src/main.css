@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@layer base {
+
+    html,
+    body {
+        @apply text-base font-sans;
+    }
+
+    h1 {
+        @apply text-3xl font-semibold mb-5;
+    }
+
+    h2,
+    .site-title {
+        @apply text-2xl font-semibold my-3;
+    }
+
+    h3 {
+        @apply text-xl font-semibold mb-3;
+    }
+
+    h4 {
+        @apply text-lg font-semibold mb-3;
+    }
+
+    p {
+        @apply my-3;
+    }
+
+    table {
+        @apply table w-full border border-gray-300 text-left;
+    }
+
+    form {
+        @apply w-full border border-gray-300 text-left;
+    }
+
+}

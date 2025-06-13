@@ -1,31 +1,85 @@
-# archer-cms
-Fullstack MasterClass Project
+# Archer CMS
 
-## Requirements:
+A modernized full-stack content management system with React (Vite), Express, SQLite (via Sequelize), and Passport for authentication.
 
-- Mongo 4.X or later
-- NodeJs v11.15.0 or Lower (https://stackoverflow.com/a/57804190)
+## 📄 License
 
-## Steps:
+This project is licensed under the **MIT License**.
 
-- clone/download repo
-- make sure you have foreman and nodemon installed globally.
-- create a .env file in your dev machine, or create on your production server.
-- run npm install
-- update import.js to add your own user
-- run: node -r dotenv/config import.js
-- make sure you have a .env, and change vars to match your settings.
-- Run by: ./start
-- Once everything is set on your local, upload everything but node_modules and .env. Be sure to add the vars in your server config. On heroku, this should run automatically as it has foreman
+You are free to:
+- ✅ Use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the software  
+- ✅ Use the project for personal, educational, internal, or commercial purposes  
+- ✅ Credit is appreciated but **not legally required**  
+- ❌ The software is provided **"as is"**, without warranty of any kind
 
-## Sample .env file
-
-MONGODB_SERVER=mongodb://localhost/archercms
-
-PORT=8080
-
-COOKIE_SERCRET=TYPE_YOUR_SECRET
+For details, see the [LICENSE](./LICENSE) file.
 
 
-## Notes:
-Please note this app is a demo, and may not be production ready (low score on google page speed). Also, it uses an older version (V3) of Gulp, unfortunately, upgrading breaks the process.
+---
+
+## 🚀 Features
+- SQLite via Sequelize (replaces MongoDB)
+- React + Vite (replaces Gulp & Browserify)
+- Passport local auth with bcrypt
+- Role-based architecture (admin/author/viewer)
+- Image upload seeding (with `.gitkeep` protection)
+- Accessible and testable frontend
+
+---
+
+## 📦 Requirements
+- Node.js 18+ recommended
+- SQLite (auto-created)
+- Git
+
+---
+
+## ⚙️ Setup Instructions
+
+1. Clone/download this repo
+2. Run `npm install`
+3. Create a `.env` file (see example below)
+4. Add a sample image to `/seed_assets/sample1.jpg`
+5. Run the safe seed (with confirmation prompt):
+    ```bash
+    npm run seed:safe
+    ```
+
+   Or to forcefully reseed without prompt:
+    ```bash
+    npm run seed
+    ```
+
+6. Start the development server:
+    ```bash
+    npm run dev
+    ```
+
+---
+
+## 🌱 .env Example
+
+```
+NODE_ENV=development
+COOKIE_SECRET=changeme123
+PORT=5000
+```
+
+---
+
+## ✅ Notes
+
+- The database (`db.sqlite`) and image uploads (`public/images/`) are automatically created during seeding.
+- Uploaded files are not committed. Use `.gitkeep` to track empty folders.
+- You can update the seeding script (`import.js`) to add more starter content.
+
+---
+
+## 📌 TODO Highlights
+
+See [TODO.md](TODO.md) for full roadmap.
+
+- Add role-based route protection (`requireRole('admin')`)
+- Password strength validation
+- Integration testing (Jest/Vitest)
+- Production build + deploy (Render, Docker, etc.)

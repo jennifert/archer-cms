@@ -1,14 +1,13 @@
-# OS X Files
+# OS files
 .DS_Store
 Thumbs.db
+ehthumbs.db
+Desktop.ini
 
-# NODE
-.node_modules
+# Node
 node_modules
-*/node_modules
-/node_modules/*
-package-lock.json
 .npm
+package-lock.json
 
 # Logs
 logs
@@ -17,5 +16,27 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# dotenv environment variables file
+# Vite
+/dist
+/.vite
+
+# Environment
 .env
+
+# Editor junk
+.vscode/
+.idea/
+*.sublime-*
+
+# Temp/backup files
+*~
+*.swp
+
+# Misc
+notes.txt
+/public/images/*
+!/public/images/.gitkeep
+
+# SQLite DB
+db.sqlite
+db.backup.sqlite
