@@ -59,11 +59,11 @@ Optionally:
 ---
 
 ## 🧭 Project Structure (WIP)
-/client -> React + Vite frontend
-/server -> Express routes and auth
-/public/images -> Uploaded content (not tracked by git)
-/seed_assets -> Images for database seeding
-.env -> Environment config
+- /client -> React + Vite frontend
+- /server -> Express routes and auth
+- /public/images -> Uploaded content (not tracked by git)
+- /seed_assets -> Images for database seeding
+- .env -> Environment config
 
 ---
 
