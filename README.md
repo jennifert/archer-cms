@@ -157,3 +157,12 @@ See [TODO.md](TODO.md) for full roadmap.
 - Password strength validation
 - Integration testing (Jest/Vitest)
 - Production build + deploy (Render, Docker, etc.)
+
+---
+
+## :gem: Acknowledgments
+
+This project would not be possible without these fantastic community resources:
+
+- [Shields.io](https://shields.io/) — For README badges
+- [Awesome README](https://github.com/matiassingers/awesome-readme) — For formatting inspiration
