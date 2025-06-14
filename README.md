@@ -81,12 +81,19 @@ Optionally:
     ```
 
 3. **Set Up Environment Variables**
-    Create a `.env` file in the root with the following content:
-    ```env
-    NODE_ENV=development
-    COOKIE_SECRET=changeme123
-    PORT=5000
-    ```
+   Create a `.env` file in the project root with the following:
+   
+   ```env
+   NODE_ENV=development          # Can be 'development' or 'production'
+   PORT=5000                     # Server port
+   COOKIE_SECRET=changeme123     # Used to sign session cookies
+   COOKIE_SECURE=false           # Set to true in production with HTTPS
+   COOKIE_SAMESITE=lax           # Recommended: 'lax' or 'strict'
+   ```
+   
+   > 💡 For production, make sure to change `COOKIE_SECRET` to something long and secure.
+   
+   📄 See [env.example](./env.example) for the latest template.
 
 4. **Add a Sample Image**
     Place a test image in:
@@ -109,19 +116,6 @@ Optionally:
     ```bash
     npm run dev
     ```
-
----
-
-## 🔐 Environment Variables
-
-| Variable         | Description                                      |
-|------------------|--------------------------------------------------|
-| `NODE_ENV`       | Set to `development` or `production`             |
-| `COOKIE_SECRET`  | Secret used to sign session cookies              |
-| `PORT`           | Port to run the server (default is `5000`)       |
-| `COOKIE_SECURE`  | Whether cookies require HTTPS (`true/false`)     |
-| `COOKIE_SAMESITE`| SameSite policy for cookies (`lax`, `strict`, etc) |
-
 
 ---
 
