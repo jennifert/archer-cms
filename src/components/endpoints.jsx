@@ -22,20 +22,30 @@ class Endpoints extends React.Component {
         return (
             <div className='end-points'>
                 <div className="api-calls">
-                    <h3>Client API Calls</h3>
+                    <h2>Client API Calls</h2>
                     <p>
                         This is a list of API calls to create your front-end of the site
                         with. Please note that for all except login and signup, you will
                         need to be signed in.
                     </p>
-                    <ul id="api-calls-table">
-                        {this.state.endpoints.map((rows, index) => (
-                            <li key={index}>
-                                <span className="route-name">{rows.route}</span>:&nbsp;
-                                <span className="route-purpose">{rows.purpose}</span>
-                            </li>
-                        ))}
-                    </ul>
+                    <table id="api-calls-table">
+                        <thead>
+                            <tr>
+                                <td>Method</td>
+                                <td>Path</td>
+                                <td>Description</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.endpoints.map(({ path, method, description }) => (
+                                <tr key={`${method}-${path}`}>
+                                    <td>{method}</td>
+                                    <td>{path}</td>
+                                    <td>{description}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         );

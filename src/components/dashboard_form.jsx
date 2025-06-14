@@ -84,64 +84,64 @@ class DashboardForm extends Component {
         }
 
         return (
-            <form onSubmit={this.saveFormData} className="p-4">
-                <h3>Create New Page/Post</h3>
+            <form onSubmit={this.saveFormData} className="dashboard-form">
+                <fieldset>
+                    <legend>Create New Page/Post</legend>
 
-                <div className="mb-3">
-                    <label className="form-label">Title</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        name="title"
-                        value={this.state.title}
-                        onChange={this.handleInputChange}
-                        required
-                    />
-                </div>
+                    <div className="mb-3">
+                        <label>Title</label>
+                        <input
+                            type="text"
+                            name="title"
+                            value={this.state.title}
+                            onChange={this.handleInputChange}
+                            required
+                        />
+                    </div>
 
-                <div className="mb-3">
-                    <label className="form-label">Content</label>
-                    <textarea
-                        className="form-control"
-                        name="content"
-                        rows="6"
-                        value={this.state.content}
-                        onChange={this.handleInputChange}
-                        required
-                    />
-                </div>
+                    <div className="mb-3">
+                        <label>Content</label>
+                        <textarea
+                            name="content"
+                            rows="6"
+                            value={this.state.content}
+                            onChange={this.handleInputChange}
+                            required
+                        />
+                    </div>
 
-                <div className="mb-3">
-                    <label className="form-label">Category</label>
-                    <select
-                        name="CategoryId"
-                        className="form-select"
-                        value={this.state.CategoryId}
-                        onChange={this.handleInputChange}
-                    >
-                        <option value="">Select a category</option>
-                        {this.state.categories.map(cat => (
-                            <option key={cat.id} value={cat.id}>{cat.name}</option>
-                        ))}
-                    </select>
-                </div>
+                    <div className="mb-3">
+                        <label>Category</label>
+                        <select
+                            defaultValue="Select a category"
+                            name="CategoryId"
+                            value={this.state.CategoryId}
+                            onChange={this.handleInputChange}
+                        >
+                            <option disabled={true}>Select a category</option>
+                            {this.state.categories.map(cat => (
+                                <option key={cat.id} value={cat.id}>{cat.name}</option>
+                            ))}
+                        </select>
+                    </div>
 
-                <div className="mb-3">
-                    <label className="form-label">Content Type</label>
-                    <select
-                        name="ContentTypeId"
-                        className="form-select"
-                        value={this.state.ContentTypeId}
-                        onChange={this.handleInputChange}
-                    >
-                        <option value="">Select type</option>
-                        {this.state.types.map(type => (
-                            <option key={type.id} value={type.id}>{type.name}</option>
-                        ))}
-                    </select>
-                </div>
+                    <div className="mb-3">
+                        <label>Content Type</label>
+                        <select
+                            defaultValue="Select a type"
+                            name="ContentTypeId"
+                            value={this.state.ContentTypeId}
+                            onChange={this.handleInputChange}
+                        >
+                            <option disabled={true}>Select a type</option>
+                            {this.state.types.map(type => (
+                                <option key={type.id} value={type.id}>{type.name}</option>
+                            ))}
+                        </select>
+                    </div>
 
-                <button className="btn btn-primary" type="submit">Save</button>
+                    <button type="submit">Save</button>
+                </fieldset>
             </form>
         );
     }

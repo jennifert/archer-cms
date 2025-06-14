@@ -1,39 +1,110 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@plugin "daisyui";
 
-@layer base {
+@layer utilities {
 
-    html,
     body {
-        @apply text-base font-sans;
+        @apply font-sans;
     }
 
     h1 {
-        @apply text-3xl font-semibold mb-5;
+        @apply text-2xl font-bold;
     }
 
-    h2,
-    .site-title {
+    h2,legend {
         @apply text-2xl font-semibold my-3;
     }
 
-    h3 {
+    h3, .dashboard-form legend {
         @apply text-xl font-semibold mb-3;
     }
 
-    h4 {
+    h4, .category-form legend, .tag-form legend .image-headers legend, .contentTypeForm legend{
         @apply text-lg font-semibold mb-3;
     }
 
-    p {
-        @apply my-3;
+    header, footer{
+        @apply p-4 text-center;
     }
 
-    table {
-        @apply table w-full border border-gray-300 text-left;
+    ul{
+        @apply list;
     }
 
-    form {
-        @apply w-full border border-gray-300 text-left;
+    button{
+        @apply btn btn-neutral mt-4;
+
     }
+
+    table{
+        @apply table table-md;
+    }
+    
+    form{
+        @apply fieldset;
+    }
+
+    input{
+        @apply input;
+    }
+
+    legend {
+        @apply fieldset-legend;
+    }
+
+    label{
+        @apply label block pt-4;
+    }
+
+    textarea{
+        @apply textarea h-24;
+    }
+
+    select{
+        @apply select;
+    }
+
+    .loginUserForm, .createUserForm{
+        @apply w-96;
+    }
+
+    .loginUserForm fieldset, .createUserForm fieldset, .imageHeaderUpload fieldset{
+        @apply border-base-300 w-96;
+    }
+
+    .category-form button, .tag-form button, .contentTypeForm button{
+        @apply ml-7;
+    }
+
+    .tag-form, .contentTypeForm{
+        @apply  mb-4 mt-4;
+    }
+
+    /* .create-user{}
+
+    .copyright{}
+
+    .dashboard-form{
+    } */
+
+    .dashboard-table{
+        @apply mt-9;
+    }
+
+    .end-points{}
+    .end-points .api-calls ul{
+        @apply list-disc pl-4;
+    }
+
+    /* .api-calls-table{
+    }
+
+    .image-headers{}
+
+    .add-header{} */
+
+    
 
 }

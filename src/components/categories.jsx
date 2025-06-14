@@ -58,12 +58,12 @@ const Categories = ({ user }) => {
     return (
         <div className="p-4">
             <h2>Categories</h2>
-            {!showForm && <button className="btn btn-sm btn-primary mb-3" onClick={handleAddNew}>Add New Category</button>}
+            {!showForm && <button onClick={handleAddNew}>Add New Category</button>}
             {showForm && (
                 <CategoryForm onDone={handleDone} existing={selected} />
             )}
             {!showForm && (
-                <table className="table table-bordered">
+                <table>
                     <thead>
                         <tr>
                             <th>Name</th>

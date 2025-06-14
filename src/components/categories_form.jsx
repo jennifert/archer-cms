@@ -43,21 +43,22 @@ const CategoryForm = ({ onDone, existing }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="mb-4">
-            <h4>{existing ? 'Edit' : 'Add New'} Category</h4>
-            {error && <div className="alert alert-danger">{error}</div>}
-            <div className="mb-3">
-                <label className="form-label">Name</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                />
-            </div>
-            <button type="submit" className="btn btn-primary me-2">Save</button>
-            <button type="button" className="btn btn-secondary" onClick={onDone}>Cancel</button>
+        <form onSubmit={handleSubmit} className="category-form">
+            <fieldset>
+                <legend>{existing ? 'Edit' : 'Add New'} Category</legend>
+                {error && <div className="alert alert-danger">{error}</div>}
+                <div className="mb-3">
+                    <label>Name</label>
+                    <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                    />
+                </div>
+                <button type="submit">Save</button>
+                <button type="button" onClick={onDone}>Cancel</button>
+            </fieldset>
         </form>
     );
 };

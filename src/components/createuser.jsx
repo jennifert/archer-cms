@@ -71,49 +71,49 @@ class CreateUser extends React.Component {
             </div>;
         }
 
-        return <div className='create-user'>
-            <h2>Create User</h2>
+        return <div className='create-user rounded-box w-xs'>
+            
 
-            {message}
+            <form onSubmit={this.handleSubmit} className='createUserForm'>
+                <fieldset>
+                    <legend>Create User</legend>
+                    
+                    {message}
 
-            <form onSubmit={this.handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="name" className="sr-only">Name</label>
-                    <input
-                        type="text"
-                        name="name"
-                        placeholder="Enter your name: "
-                        className="form-control"
-                        value={this.state.name}
-                        onChange={this.handleChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="email" className="sr-only">Email address</label>
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Enter your email: "
-                        className="form-control"
-                        value={this.state.email}
-                        onChange={this.handleChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password" className="sr-only">Password</label>
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Enter your password: "
-                        className="form-control"
-                        value={this.state.password}
-                        onChange={this.handleChange}
-                    />
-                </div>
-                <button type="submit" id="btn-submit-create" name="createUserSubmit">
-                    <i className="fa fa-plus" aria-hidden="true"></i>&nbsp;
-                    Create User
-                </button>
+                    <div>
+                        <label htmlFor="name">Name</label>
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Enter your name: "
+                            value={this.state.name}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="email">Email address</label>
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Enter your email: "
+                            value={this.state.email}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="password">Password</label>
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Enter your password: "
+                            value={this.state.password}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <button type="submit" id="btn-submit-create" name="createUserSubmit">
+                        Create User
+                    </button>
+                </fieldset>
             </form>
         </div>
     }

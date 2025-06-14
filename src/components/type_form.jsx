@@ -43,11 +43,12 @@ const TypeForm = ({ onDone, existing }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="mb-4">
-            <h4>{existing ? 'Edit' : 'Add New'} Content Type</h4>
+        <form onSubmit={handleSubmit} className="contentTypeForm">
+            <fieldset>
+            <legend>{existing ? 'Edit' : 'Add New'} Content Type</legend>
             {error && <div className="alert alert-danger">{error}</div>}
             <div className="mb-3">
-                <label className="form-label">Name</label>
+                <label>Name</label>
                 <input
                     type="text"
                     className="form-control"
@@ -56,8 +57,9 @@ const TypeForm = ({ onDone, existing }) => {
                     required
                 />
             </div>
-            <button type="submit" className="btn btn-primary me-2">Save</button>
-            <button type="button" className="btn btn-secondary" onClick={onDone}>Cancel</button>
+            <button type="submit">Save</button>
+            <button type="button" onClick={onDone}>Cancel</button>
+            </fieldset>
         </form>
     );
 };

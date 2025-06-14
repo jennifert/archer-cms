@@ -8,9 +8,8 @@
   "license": "MIT",
   "licenseText": "See LICENSE file for full license terms.",
   "dependencies": {
-    "@tailwindcss/forms": "^0.5.10",
-    "@tinymce/tinymce-react": "^6.2.1",
     "bcrypt": "^5.1.1",
+    "daisyui": "^5.0.43",
     "dotenv": "^16.5.0",
     "express": "^4.18.2",
     "express-session": "^1.18.1",
@@ -25,7 +24,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"vite\" \"nodemon app.js\"",
+    "dev": "vite",
     "build": "vite build && npm run postbuild",
     "postbuild": "node scripts/swap-robots.js",
     "serve": "vite preview",
@@ -34,11 +33,6 @@
     "seed:safe": "node import.js"
   },
   "devDependencies": {
-    "@tailwindcss/aspect-ratio": "^0.4.2",
-    "@tailwindcss/container-queries": "^0.1.1",
-    "@tailwindcss/line-clamp": "^0.4.4",
-    "@tailwindcss/postcss": "^4.1.10",
-    "@tailwindcss/typography": "^0.5.16",
     "@vitejs/plugin-react": "^4.5.2",
     "autoprefixer": "^10.4.21",
     "concurrently": "^9.1.2",
@@ -48,7 +42,7 @@
     "eslint-plugin-react": "^7.37.5",
     "nodemon": "^3.1.10",
     "postcss": "^8.5.5",
-    "tailwindcss": "^4.1.10",
+    "tailwindcss": "^3.4.17",
     "vite": "^6.3.5"
   }
 }

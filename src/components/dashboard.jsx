@@ -51,7 +51,7 @@ class Dashboard extends Component {
             <div className="p-4">
                 <h2>Dashboard</h2>
                 {!showForm && (
-                    <button className="btn btn-success mb-3" onClick={this.handleAddNew}>
+                    <button onClick={this.handleAddNew}>
                         Add Post/Page
                     </button>
                 )}
@@ -63,7 +63,7 @@ class Dashboard extends Component {
                         onSave={this.handleFormClose}
                     />
                 ) : (
-                    <table className="table table-striped">
+                    <table className="dashboard-table">
                         <thead>
                             <tr>
                                 <th>Title</th>

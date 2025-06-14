@@ -59,39 +59,40 @@ class LoginForm extends React.Component {
         }
 
         return <div className='login'>
-            <h2>Login User</h2>
+            <h2></h2>
 
             {message}
 
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} className='loginUserForm'>
+                <fieldset>
+                    <legend>Login User</legend>
 
-                <div className="form-group">
-                    <label htmlFor="email" className="sr-only">Email address</label>
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Enter your email: "
-                        className="form-control"
-                        value={this.state.email}
-                        onChange={this.handleChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password" className="sr-only">Password</label>
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Enter your password: "
-                        className="form-control"
-                        value={this.state.password}
-                        onChange={this.handleChange}
-                    />
-                </div>
+                    <div>
+                        <label htmlFor="email">Email address</label>
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Enter your email: "
+                            value={this.state.email}
+                            onChange={this.handleChange}
+                        />
+                    </div>
 
-                <button type="submit" id="btn-submit-login" name="loginSubmit">
-                    <i className="fa fa-sign-in" aria-hidden="true"></i>&nbsp;
-                    Sign In
-                </button>
+                    <div>
+                        <label htmlFor="password">Password</label>
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Enter your password: "
+                            value={this.state.password}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+
+                    <button type="submit" id="btn-submit-login" name="loginSubmit">
+                        Sign In
+                    </button>
+                </fieldset>
             </form>
             {
                 this.state.errors && <div className='error'>{this.state.errors}</div>

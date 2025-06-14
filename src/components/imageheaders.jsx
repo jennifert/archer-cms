@@ -12,6 +12,7 @@ class ImageHeaders extends React.Component {
             toDelete: '',
             newImage: '',
         };
+        this.fetchHeaderImages = this.fetchHeaderImages.bind(this);
     }
     componentDidMount() {
         // this.fetchEndPoints();
@@ -31,19 +32,20 @@ class ImageHeaders extends React.Component {
             }));
     }
 
-    // fetchEndPoints() {
-    //     let dashboard = [];
-    //     fetch('/api/settings/endpoints', {
-    //         method: 'GET',
-    //         credentials: 'include'
-    //     })
-    //         .then(resp => resp.json())
-    //         .then(json => this.setState({ endpoints: json }));
-    // }
-
     handleFileUpload = async (e) => {
         const file = e.target.files[0];
         if (!file) return;
+
+        if (file.size > 700 * 1024) {
+            alert('File too large. Must be under 700KB.');
+            return;
+        }
+
+        if (!file.type.startsWith('image/')) {
+            alert('Only image files are allowed.');
+            return;
+        }
+
 
         const formData = new FormData();
         formData.append('image', file);
@@ -86,15 +88,19 @@ class ImageHeaders extends React.Component {
 
     render() {
         console.log('🧪 Images state:', this.state.allheaderImages);
-        return <main className='settings'>
+        return <main className='image-headers'>
             <h1>Header image</h1>
             <div className="content">
-                <div className="api-calls">
-                    <form className="inline-form">
-                        <input type="file" onChange={this.handleFileUpload} />
+                <div className="add-header">
+                    <form className='imageHeaderUpload'>
+                        <fieldset>
+                            <legend>Upload New Header Image</legend>
+                            <label className="label">Max size under 1MB</label>
+                            <input type="file" className="file-input file-input-primary" onChange={this.handleFileUpload} />
+                        </fieldset>
                     </form>
 
-                    <table className='table table-condensed table-hover table-responsive'>
+                    <table className='image-headers-table'>
                         <thead>
                             <tr>
                                 <th>Date</th>
@@ -113,20 +119,6 @@ class ImageHeaders extends React.Component {
                     </table>
                 </div>
 
-                {/* <div className="api-calls">
-                    <h3>Client API Calls</h3>
-                    <p>This is a list of API calls to create your front-end of teh site with. Please note for all execpt login and sign up, you will need to be signed-in.</p>
-                    <ul id="api-calls-table">
-                        {this.state.endpoints.map((rows) => {
-                            return (
-                                <li key={rows._id}>
-                                    <span className="route-name">{rows.route}</span>:&nbsp;
-                                    <span className="route-purpose">{rows.purpose}</span>
-                                </li>
-                            );
-                        })}
-                    </ul>
-                </div> */}
             </div>
         </main>
     }

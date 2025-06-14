@@ -4,12 +4,6 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  root: '.', // project root
-  base: '/',
-  build: {
-    outDir: 'dist',
-    sourcemap: true
-  },
   resolve: {
     alias: {
       '@components': path.resolve(__dirname, 'src/components'),
@@ -19,9 +13,8 @@ export default defineConfig({
   },
   server: {
     port: 3000,
-    open: true,
+    open: false,
     proxy: {
-      // Proxy API requests to your Express backend
       '/api': 'http://localhost:5000'
     }
   }

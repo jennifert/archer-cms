@@ -71,8 +71,8 @@ class Tags extends React.Component {
                 <h1>Tags</h1>
 
                 <div className="content">
-                    <button className="btn btn-success mb-3" onClick={() => this.openForm('Add')}>
-                        <i className="fa fa-plus"></i> Add New Tag
+                    <button onClick={() => this.openForm('Add')}>
+                        Add New Tag
                     </button>
 
                     {mode && (
@@ -85,7 +85,7 @@ class Tags extends React.Component {
                         />
                     )}
 
-                    <table className="table table-condensed table-hover table-responsive">
+                    <table>
                         <thead>
                             <tr>
                                 <th>Date</th>

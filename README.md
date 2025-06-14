@@ -1,6 +1,14 @@
 # Archer CMS
 
-A modernized full-stack content management system with React (Vite), Express, SQLite (via Sequelize), and Passport for authentication.
+![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Node.js](https://img.shields.io/badge/node-18%2B-brightgreen)
+![SQLite](https://img.shields.io/badge/database-SQLite-lightgrey)
+![React](https://img.shields.io/badge/frontend-React%2019-blue)
+![Build with Vite](https://img.shields.io/badge/bundler-Vite-646CFF)
+
+A modernized full-stack content management system built with React (Vite), Express, SQLite (via Sequelize), and Passport for authentication.
+
+---
 
 ## 📄 License
 
@@ -14,7 +22,6 @@ You are free to:
 
 For details, see the [LICENSE](./LICENSE) file.
 
-
 ---
 
 ## 🚀 Features
@@ -24,54 +31,127 @@ For details, see the [LICENSE](./LICENSE) file.
 - Role-based architecture (admin/author/viewer)
 - Image upload seeding (with `.gitkeep` protection)
 - Accessible and testable frontend
+- Modern ESLint config for React projects
 
 ---
 
-## 📦 Requirements
-- Node.js 18+ recommended
-- SQLite (auto-created)
-- Git
+## 🛠 Tech Stack
+
+- **Frontend:** React 19, Vite, Tailwind CSS
+- **Backend:** Express.js, Passport (local strategy)
+- **Database:** SQLite (via Sequelize ORM)
+- **Authentication:** bcrypt + Passport.js
+- **File Uploads:** Multer (local, seed images supported)
 
 ---
 
-## ⚙️ Setup Instructions
+## 📦 Prerequisites
+Before you begin, ensure you have the following installed:
 
-1. Clone/download this repo
-2. Run `npm install`
-3. Create a `.env` file (see example below)
-4. Add a sample image to `/seed_assets/sample1.jpg`
-5. Run the safe seed (with confirmation prompt):
+- [Node.js](https://nodejs.org/) (version 18 or higher)
+- [npm](https://www.npmjs.com/) (comes with Node)
+- Git CLI for cloning
+- SQLite (auto-created via Sequelize — no setup needed)
+
+Optionally:
+- [VS Code](https://code.visualstudio.com/) + ESLint/Tailwind extensions
+
+---
+
+## 🧭 Project Structure (WIP)
+/client -> React + Vite frontend
+/server -> Express routes and auth
+/public/images -> Uploaded content (not tracked by git)
+/seed_assets -> Images for database seeding
+.env -> Environment config
+
+---
+
+## ⚙️ Getting Started
+
+1. **Clone the Repository**
+    ```bash
+    git clone https://github.com/jennifert/archer-cms.git
+    cd archer-cms
+    ```
+
+2. **Install Dependencies**
+    ```bash
+    npm install
+    ```
+
+3. **Set Up Environment Variables**
+    Create a `.env` file in the root with the following content:
+    ```env
+    NODE_ENV=development
+    COOKIE_SECRET=changeme123
+    PORT=5000
+    ```
+
+4. **Add a Sample Image**
+    Place a test image in:
+    ```
+    /seed_assets/sample1.jpg
+    ```
+
+5. **Seed the Database**
+    Safe prompt:
     ```bash
     npm run seed:safe
     ```
 
-   Or to forcefully reseed without prompt:
+    Or force seed:
     ```bash
     npm run seed
     ```
 
-6. Start the development server:
+6. **Start Development Server**
     ```bash
     npm run dev
     ```
 
 ---
 
-## 🌱 .env Example
+## 🔐 Environment Variables
 
-```
-NODE_ENV=development
-COOKIE_SECRET=changeme123
-PORT=5000
-```
+| Variable         | Description                                      |
+|------------------|--------------------------------------------------|
+| `NODE_ENV`       | Set to `development` or `production`             |
+| `COOKIE_SECRET`  | Secret used to sign session cookies              |
+| `PORT`           | Port to run the server (default is `5000`)       |
+| `COOKIE_SECURE`  | Whether cookies require HTTPS (`true/false`)     |
+| `COOKIE_SAMESITE`| SameSite policy for cookies (`lax`, `strict`, etc) |
+
+
+---
+
+## 📜 NPM Scripts
+
+| Command             | Description                                 |
+|---------------------|---------------------------------------------|
+| `npm run dev`       | Starts Vite (frontend) and Nodemon (server) |
+| `npm run seed`      | Force seeds the database                    |
+| `npm run seed:safe` | Safe seeding with confirmation prompt       |
+| `npm run build`     | Builds frontend and runs postbuild scripts  |
+| `npm run serve`     | Serves the production frontend build        |
 
 ---
 
 ## ✅ Notes
 
-- The database (`db.sqlite`) and image uploads (`public/images/`) are automatically created during seeding.
-- Uploaded files are not committed. Use `.gitkeep` to track empty folders.
-- You can update the seeding script (`import.js`) to add more starter content.
+- The database (`db.sqlite`) and uploaded images (`public/images/`) are auto-generated during seeding.
+- `.gitkeep` is used to track empty folders for uploads.
+- Modify `import.js` to customize your seed content.
+
+---
+
+## 📘 Documentation
+
+- [`TODO.md`](./TODO.md) — Roadmap and planned enhancements
+- [`API_REFERENCE.md`](./API_REFERENCE.md) — Full list of backend API routes
+- `/api/settings/endpoints` — Dev-only route that returns all current Express routes dynamically
+
+
 
 ---
 
