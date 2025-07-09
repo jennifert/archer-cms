@@ -19,6 +19,7 @@ yarn-error.log*
 # Vite
 /dist
 /.vite
+/.cache
 
 # Environment
 .env
@@ -40,3 +41,5 @@ notes.txt
 # SQLite DB
 db.sqlite
 db.backup.sqlite
+*.sqlite
+*.sqlite3

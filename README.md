@@ -1,10 +1,11 @@
 # Archer CMS
 
 ![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)
-![Node.js](https://img.shields.io/badge/node-18%2B-brightgreen)
 ![SQLite](https://img.shields.io/badge/database-SQLite-lightgrey)
 ![React](https://img.shields.io/badge/frontend-React%2019-blue)
 ![Build with Vite](https://img.shields.io/badge/bundler-Vite-646CFF)
+[![Node.js](https://img.shields.io/badge/Node.js-22.16.0-brightgreen?logo=nodedotjs)](https://nodejs.org/)
+[![npm](https://img.shields.io/badge/npm-10.9.2-red?logo=npm)](https://www.npmjs.com/)
 
 A modernized full-stack content management system built with React (Vite), Express, SQLite (via Sequelize), and Passport for authentication.
 
@@ -48,8 +49,8 @@ For details, see the [LICENSE](./LICENSE) file.
 ## 📦 Prerequisites
 Before you begin, ensure you have the following installed:
 
-- [Node.js](https://nodejs.org/) (version 18 or higher)
-- [npm](https://www.npmjs.com/) (comes with Node)
+- [Node.js](https://nodejs.org/) (version 22 or higher)
+- [npm](https://www.npmjs.com/) (version 10 or higher)
 - Git CLI for cloning
 - SQLite (auto-created via Sequelize — no setup needed)
 
@@ -137,6 +138,12 @@ Optionally:
 - `.gitkeep` is used to track empty folders for uploads.
 - Modify `import.js` to customize your seed content.
 
+### ✍️ Rich Text Editor
+Editor: TBD 
+
+This CMS supports WYSIWYG editing via [Example](https://example.org).  
+To customize behavior or sanitize output, see `/src/components/______.jsx`.
+
 ---
 
 ## 📘 Documentation
@@ -145,7 +152,11 @@ Optionally:
 - [`API_REFERENCE.md`](./API_REFERENCE.md) — Full list of backend API routes
 - `/api/settings/endpoints` — Dev-only route that returns all current Express routes dynamically
 
+---
 
+## 🚢 Deployment (Coming Soon)
+
+TBD
 
 ---
 
