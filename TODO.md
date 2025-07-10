@@ -6,6 +6,7 @@ This file tracks future enhancements, improvements, and cleanup tasks.
 ## In Progress
 ### 🐛 Known Issues & Error Handling
 - [ ] Add backend logs for success/fail auth events (currently logs only show DB queries)
+- [ ] add prestart item: npm run seed. Also add to post install if possible
 
 ---
 
@@ -46,7 +47,7 @@ This file tracks future enhancements, improvements, and cleanup tasks.
 ---
 
 ### 📦 Deployment
-- [ ] Generate Dockerfile and `.dockerignore`
+- [ ] Figure out where to go and deployment instructions
 - [ ] Add production-ready build scripts
 - [ ] Add deployment instructions (e.g. Render, Vercel, Railway)
 
