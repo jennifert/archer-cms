@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Navigate } from 'react-router-dom';
 
 class DashboardForm extends Component {
     constructor(props) {
@@ -40,38 +39,56 @@ class DashboardForm extends Component {
 
     async saveFormData(e) {
         e.preventDefault();
-        this.setState({ loading: true });
 
-        const { title, content, CategoryId, ContentTypeId } = this.state;
+        const {
+            title,
+            content,
+            CategoryId,
+            ContentTypeId
+        } = this.state;
+
+        if (!CategoryId || !ContentTypeId) {
+            console.error('❌ Category and content type are required.');
+            return;
+        }
+
         const payload = {
             title,
             content,
-            CategoryId: parseInt(CategoryId, 10),
-            ContentTypeId: parseInt(ContentTypeId, 10)
+            CategoryId: Number(CategoryId),
+            ContentTypeId: Number(ContentTypeId)
         };
 
+        this.setState({ loading: true });
+
         const method = this.props.post ? 'PUT' : 'POST';
-        const url = this.props.post ? `/api/page/${this.props.post.id}` : '/api/page';
+        const url = this.props.post
+            ? `/api/page/${this.props.post.id}`
+            : '/api/page';
 
         try {
             const res = await fetch(url, {
                 method,
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify(payload)
             });
 
             if (!res.ok) {
                 console.error('❌ Save failed:', await res.text());
+                this.setState({ loading: false });
                 return;
             }
 
             this.setState({ loading: false });
 
             if (this.props.onSave) {
-                this.props.onSave(); // toggle form off and refresh
+                this.props.onSave();
             }
         } catch (err) {
             console.error('🔥 Save error:', err);
+            this.setState({ loading: false });
         }
     }
 
@@ -89,8 +106,9 @@ class DashboardForm extends Component {
                     <legend>Create New Page/Post</legend>
 
                     <div className="mb-3">
-                        <label>Title</label>
+                        <label htmlFor="title">Title</label>
                         <input
+                            id="title"
                             type="text"
                             name="title"
                             value={this.state.title}
@@ -100,8 +118,9 @@ class DashboardForm extends Component {
                     </div>
 
                     <div className="mb-3">
-                        <label>Content</label>
+                        <label htmlFor="content">Content</label>
                         <textarea
+                            id="content"
                             name="content"
                             rows="6"
                             value={this.state.content}
@@ -111,31 +130,43 @@ class DashboardForm extends Component {
                     </div>
 
                     <div className="mb-3">
-                        <label>Category</label>
+                        <label htmlFor="category">Category</label>
                         <select
-                            defaultValue="Select a category"
+                            id="category"
                             name="CategoryId"
                             value={this.state.CategoryId}
                             onChange={this.handleInputChange}
+                            required
                         >
-                            <option disabled={true}>Select a category</option>
+                            <option value="" disabled>
+                                Select a category
+                            </option>
+
                             {this.state.categories.map(cat => (
-                                <option key={cat.id} value={cat.id}>{cat.name}</option>
+                                <option key={cat.id} value={cat.id}>
+                                    {cat.name}
+                                </option>
                             ))}
                         </select>
                     </div>
 
                     <div className="mb-3">
-                        <label>Content Type</label>
+                        <label htmlFor="content-type">Content Type</label>
                         <select
-                            defaultValue="Select a type"
+                            id="content-type"
                             name="ContentTypeId"
                             value={this.state.ContentTypeId}
                             onChange={this.handleInputChange}
+                            required
                         >
-                            <option disabled={true}>Select a type</option>
+                            <option value="" disabled>
+                                Select a type
+                            </option>
+
                             {this.state.types.map(type => (
-                                <option key={type.id} value={type.id}>{type.name}</option>
+                                <option key={type.id} value={type.id}>
+                                    {type.name}
+                                </option>
                             ))}
                         </select>
                     </div>

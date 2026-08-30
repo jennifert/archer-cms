@@ -15,7 +15,7 @@ class CreateUser extends React.Component {
     }
     handleSubmit(e) {
         e.preventDefault();
-        const user = Object.assign({}, this.state);
+        
         if (this.state.email && this.state.password) {
             fetch('/api/signup', {
                 method: 'POST',

@@ -14,7 +14,6 @@ class LoginForm extends React.Component {
     }
     handleSubmit(e) {
         e.preventDefault();
-        const user = Object.assign({}, this.state);
 
         fetch('/api/login', {
             method: 'POST',
@@ -59,7 +58,6 @@ class LoginForm extends React.Component {
         }
 
         return <div className='login'>
-            <h2></h2>
 
             {message}
 

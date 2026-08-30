@@ -6,7 +6,6 @@ import LocalStrategy from 'passport-local';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import multer from 'multer';
 
 import authRoutes from './server/routes/authRoutes.js';
 import imageRoutes from './server/routes/imageRoutes.js';
@@ -17,7 +16,6 @@ import typeRoutes from './server/routes/typeRoutes.js';
 import settingsRoutes from './server/routes/settingsRoutes.js';
 
 import models from './server/models/index.js'; // Sequelize models
-import requireLogin from './require_login.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -48,7 +46,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Passport Local Strategy
-const { User, Category, Tag, HeaderImage } = models;
+const { User } = models;
+
 passport.use(new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password'

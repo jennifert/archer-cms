@@ -29,16 +29,29 @@ export const getPageById = async (req, res) => {
 
 export const createPage = async (req, res) => {
     try {
-        const { title, content, CategoryId, ContentTypeId } = req.body;
-        const newPage = await Page.create({
+        const {
             title,
             content,
             CategoryId,
-            ContentTypeId,
+            ContentTypeId
+        } = req.body;
+
+        if (!title || !content || !CategoryId || !ContentTypeId) {
+            return res.status(400).json({
+                error: 'Title, content, category, and content type are required'
+            });
+        }
+
+        const newPage = await Page.create({
+            title,
+            content,
+            CategoryId: Number(CategoryId),
+            ContentTypeId: Number(ContentTypeId),
             UserId: req.user.id,
             dateCreated: new Date(),
             dateEdited: new Date()
         });
+
         res.status(201).json(newPage);
     } catch (err) {
         console.error('🔥 POST /page error:', err);

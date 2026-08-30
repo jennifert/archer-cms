@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import TypeForm from './type_form.jsx';
 
-const Types = ({ user }) => {
+const Types = () => {
     const [types, setTypes] = useState([]);
     const [selected, setSelected] = useState(null);
     const [showForm, setShowForm] = useState(false);

@@ -67,7 +67,7 @@ const seed = async () => {
         });
 
         const type1 = await ContentType.create({ name: 'post' });
-        const type2 = await ContentType.create({ name: 'page' });
+        await ContentType.create({ name: 'page' });
 
         const category1 = await Category.create({
             name: 'JavaScript',
@@ -75,15 +75,29 @@ const seed = async () => {
             UserId: user1.id
         });
 
-        const category2 = await Category.create({
+        await Category.create({
             name: 'PHP',
             date: new Date(),
             UserId: user2.id
         });
 
-        const tag1 = await Tag.create({ name: 'React', date: new Date(), UserId: user1.id });
-        const tag2 = await Tag.create({ name: 'Vanilla', date: new Date(), UserId: user1.id });
-        const tag3 = await Tag.create({ name: 'jQuery', date: new Date(), UserId: user2.id });
+        const tag1 = await Tag.create({
+            name: 'React',
+            date: new Date(),
+            UserId: user1.id
+        });
+
+        const tag2 = await Tag.create({
+            name: 'Vanilla',
+            date: new Date(),
+            UserId: user1.id
+        });
+
+        await Tag.create({
+            name: 'jQuery',
+            date: new Date(),
+            UserId: user2.id
+        });
 
 
         const sampleSource = path.resolve('./seed_assets/sample1.jpg');
@@ -104,14 +118,14 @@ const seed = async () => {
         });
 
         const testPage = await Page.create({
-        title: 'Welcome to Archer CMS',
-        content: 'This is a test post created by the seeder.',
-        dateCreated: new Date(),
-        dateEdited: new Date(),
-        published: true,
-        UserId: user1.id,
-        CategoryId: category1.id,
-        ContentTypeId: type1.id
+            title: 'Welcome to Archer CMS',
+            content: 'This is a test post created by the seeder.',
+            dateCreated: new Date(),
+            dateEdited: new Date(),
+            published: true,
+            UserId: user1.id,
+            CategoryId: category1.id,
+            ContentTypeId: type1.id
         });
 
         await testPage.setTags([tag1, tag2]);

@@ -59,20 +59,21 @@ class TagForm extends React.Component {
             <form className="tag-form" onSubmit={this.handleSubmit}>
                 <fieldset>
                     <legend>{mode} Tag</legend>
-                {error && <div className="alert alert-danger">{error}</div>}
-                <div className="mb-3">
-                <label>Tag Name</label>
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Tag name"
-                    value={name}
-                    onChange={this.handleInputChange}
-                    required
-                />
-                </div>
-                
-                <button type="submit">
+                    {error && <div className="alert alert-danger">{error}</div>}
+                    <div className="mb-3">
+                        <label htmlFor="tag-name">Tag Name</label>
+                        <input
+                            id="tag-name"
+                            type="text"
+                            name="name"
+                            placeholder="Tag name"
+                            value={name}
+                            onChange={this.handleInputChange}
+                            required
+                        />
+                    </div>
+
+                    <button type="submit">
                         Save
                     </button>
                     <button type="button" onClick={onClose}>

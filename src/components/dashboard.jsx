@@ -78,7 +78,7 @@ class Dashboard extends Component {
                             {dashboard.length === 0 ? (
                                 <tr>
                                     <td colSpan="6" className="text-center text-muted">
-                                        No pages or posts found. Click "Add Post/Page" to create one.
+                                        No pages or posts found. Click Add Post/Page to create one.
                                     </td>
                                 </tr>
                             ) : (

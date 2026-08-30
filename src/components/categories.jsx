@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import CategoryForm from './categories_form.jsx';
 
-const Categories = ({ user }) => {
+const Categories = () => {
     const [categories, setCategories] = useState([]);
     const [selected, setSelected] = useState(null);
     const [showForm, setShowForm] = useState(false);

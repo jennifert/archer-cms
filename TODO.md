@@ -16,6 +16,7 @@ This file tracks future enhancements, improvements, and cleanup tasks.
 - [ ] Implement rate limiting with `express-rate-limit`
 - [ ] Add email verification and password reset (token-based)
 - [ ] Move endpoints.jsx, and endpoint item in app.jsx, menu.jsx to be admin only.
+- [ ] Review long-term SQLite driver strategy
 
 ---
 

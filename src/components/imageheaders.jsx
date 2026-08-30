@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import ImageHeadersTable from './imageheaders_table.jsx';
 
 class ImageHeaders extends React.Component {
@@ -20,7 +19,6 @@ class ImageHeaders extends React.Component {
     }
 
     fetchHeaderImages() {
-        let dashboard = [];
         fetch('/api/images/headers', {
             method: 'GET',
             credentials: 'include'
@@ -95,8 +93,14 @@ class ImageHeaders extends React.Component {
                     <form className='imageHeaderUpload'>
                         <fieldset>
                             <legend>Upload New Header Image</legend>
-                            <label className="label">Max size under 1MB</label>
-                            <input type="file" className="file-input file-input-primary" onChange={this.handleFileUpload} />
+                            <label htmlFor="header-image">Header image</label>
+                            <small>Max size under 1MB</small>
+                            <input
+                                id="header-image"
+                                type="file"
+                                className="file-input file-input-primary"
+                                onChange={this.handleFileUpload}
+                            />
                         </fieldset>
                     </form>
 

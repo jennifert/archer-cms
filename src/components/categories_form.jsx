@@ -48,8 +48,9 @@ const CategoryForm = ({ onDone, existing }) => {
                 <legend>{existing ? 'Edit' : 'Add New'} Category</legend>
                 {error && <div className="alert alert-danger">{error}</div>}
                 <div className="mb-3">
-                    <label>Name</label>
+                    <label htmlFor="category-name">Name</label>
                     <input
+                        id="category-name"
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}

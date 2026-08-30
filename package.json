@@ -8,8 +8,8 @@
   "license": "MIT",
   "licenseText": "See LICENSE file for full license terms.",
   "dependencies": {
+    "@picocss/pico": "^2.1.1",
     "bcrypt": "^5.1.1",
-    "daisyui": "^5.0.43",
     "dotenv": "^16.5.0",
     "express": "^4.18.2",
     "express-session": "^1.18.1",
@@ -20,29 +20,29 @@
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.2",
     "sequelize": "^6.37.7",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^6.0.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
-    "build": "vite build && npm run postbuild",
+    "build": "vite build",
     "postbuild": "node scripts/swap-robots.js",
     "serve": "vite preview",
     "start": "node app.js",
     "seed": "node import.js --force",
-    "seed:safe": "node import.js"
+    "seed:safe": "node import.js",
+    "lint": "eslint ."
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@vitejs/plugin-react": "^4.5.2",
-    "autoprefixer": "^10.4.21",
     "concurrently": "^9.1.2",
-    "eslint": "^8.56.0",
-    "eslint-config-react-app": "^7.0.1",
+    "eslint": "^9.39.5",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
+    "globals": "^17.11.0",
     "nodemon": "^3.1.10",
     "postcss": "^8.5.5",
-    "tailwindcss": "^3.4.17",
     "vite": "^6.3.5"
   }
 }

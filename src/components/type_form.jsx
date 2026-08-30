@@ -45,20 +45,21 @@ const TypeForm = ({ onDone, existing }) => {
     return (
         <form onSubmit={handleSubmit} className="contentTypeForm">
             <fieldset>
-            <legend>{existing ? 'Edit' : 'Add New'} Content Type</legend>
-            {error && <div className="alert alert-danger">{error}</div>}
-            <div className="mb-3">
-                <label>Name</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                />
-            </div>
-            <button type="submit">Save</button>
-            <button type="button" onClick={onDone}>Cancel</button>
+                <legend>{existing ? 'Edit' : 'Add New'} Content Type</legend>
+                {error && <div className="alert alert-danger">{error}</div>}
+                <div className="mb-3">
+                    <label htmlFor="content-type-name">Name</label>
+                    <input
+                        id="content-type-name"
+                        type="text"
+                        className="form-control"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                    />
+                </div>
+                <button type="submit">Save</button>
+                <button type="button" onClick={onDone}>Cancel</button>
             </fieldset>
         </form>
     );
