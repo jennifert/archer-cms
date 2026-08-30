@@ -142,39 +142,34 @@ Optionally:
 
    > ⚠️ `npm run seed` is destructive and may overwrite existing database content.
 
-6. **Start the Backend**
-
-   In one terminal:
-
-   ```bash
-   npm start
-   ```
-
-7. **Start the Frontend**
-
-   In a second terminal:
+6. **Start the Development Environment**
 
    ```bash
    npm run dev
    ```
 
-   Vite will proxy `/api` requests to the Express server using the configured backend port.
+   This starts both:
+
+   - the Vite frontend development server
+   - the Express backend with Nodemon
+
+   Vite proxies `/api` requests to the Express server using the configured backend port.
 
 ---
 
 ## 📜 NPM Scripts
 
-| Command             | Description                                      |
-|---------------------|--------------------------------------------------|
-| `npm run dev`       | Starts the Vite development server               |
-| `npm start`         | Starts the Express backend                       |
-| `npm run seed`      | Force seeds and resets the database              |
-| `npm run seed:safe` | Runs the database seeder with confirmation       |
-| `npm run lint`      | Runs ESLint                                      |
-| `npm run build`     | Builds the frontend and runs postbuild scripts   |
-| `npm run serve`     | Previews the production frontend build with Vite |
-
-> During development, run `npm run dev` and `npm start` in separate terminals.
+| Command               | Description                                      |
+|-----------------------|--------------------------------------------------|
+| `npm run dev`         | Starts Vite and the Express server together      |
+| `npm run dev:client`  | Starts only the Vite development server          |
+| `npm run dev:server`  | Starts only the Express server with Nodemon      |
+| `npm start`           | Starts the Express server without Nodemon        |
+| `npm run seed`        | Force seeds and resets the database              |
+| `npm run seed:safe`   | Runs the database seeder with confirmation       |
+| `npm run lint`        | Runs ESLint                                      |
+| `npm run build`       | Builds the frontend and runs postbuild scripts   |
+| `npm run serve`       | Previews the production frontend build with Vite |
 
 ---
 
