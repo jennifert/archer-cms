@@ -59,7 +59,7 @@ class App extends React.Component {
 
     renderAuthenticated() {
         return (
-            <div className="min-h-screen container">
+            <div className="container">
                 <SideMenu />
                 <main>
                     <div className="logout-button">

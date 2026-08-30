@@ -48,7 +48,7 @@ class Dashboard extends Component {
         const { dashboard, showForm, editingPost } = this.state;
 
         return (
-            <div className="p-4">
+            <div>
                 <h2>Dashboard</h2>
                 {!showForm && (
                     <button onClick={this.handleAddNew}>
@@ -77,7 +77,7 @@ class Dashboard extends Component {
                         <tbody>
                             {dashboard.length === 0 ? (
                                 <tr>
-                                    <td colSpan="6" className="text-center text-muted">
+                                    <td colSpan="6" className="text-center">
                                         No pages or posts found. Click Add Post/Page to create one.
                                     </td>
                                 </tr>

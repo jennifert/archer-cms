@@ -56,7 +56,7 @@ const Categories = () => {
     }, []);
 
     return (
-        <div className="p-4">
+        <div>
             <h2>Categories</h2>
             {!showForm && <button onClick={handleAddNew}>Add New Category</button>}
             {showForm && (

@@ -56,7 +56,7 @@ const Types = () => {
     }, []);
 
     return (
-        <div className="p-4">
+        <div>
             <h2>Content Types</h2>
             {!showForm && <button onClick={handleAddNew}>Add New Type</button>}
             {showForm && (

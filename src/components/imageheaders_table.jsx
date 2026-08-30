@@ -24,7 +24,7 @@ const ImageHeadersTable = ({ id, filename, dateSaved, User, onDelete, whoami }) 
             <td>{User?.name || 'Unknown'}</td>
             <td>
                 {whoami?.id === User?.id && (
-                    <button className="btn btn-danger btn-sm" onClick={deleteImage}>
+                    <button onClick={deleteImage}>
                         Delete
                     </button>
                 )}

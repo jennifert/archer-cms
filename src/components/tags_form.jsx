@@ -60,7 +60,7 @@ class TagForm extends React.Component {
                 <fieldset>
                     <legend>{mode} Tag</legend>
                     {error && <div className="alert alert-danger">{error}</div>}
-                    <div className="mb-3">
+                    <div>
                         <label htmlFor="tag-name">Tag Name</label>
                         <input
                             id="tag-name"

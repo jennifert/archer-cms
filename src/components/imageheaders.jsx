@@ -98,7 +98,6 @@ class ImageHeaders extends React.Component {
                             <input
                                 id="header-image"
                                 type="file"
-                                className="file-input file-input-primary"
                                 onChange={this.handleFileUpload}
                             />
                         </fieldset>

@@ -47,7 +47,7 @@ const CategoryForm = ({ onDone, existing }) => {
             <fieldset>
                 <legend>{existing ? 'Edit' : 'Add New'} Category</legend>
                 {error && <div className="alert alert-danger">{error}</div>}
-                <div className="mb-3">
+                <div>
                     <label htmlFor="category-name">Name</label>
                     <input
                         id="category-name"

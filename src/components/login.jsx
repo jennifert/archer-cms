@@ -57,7 +57,7 @@ class LoginForm extends React.Component {
             message = <div className="alert alert-success">🎉 Login successful! Redirecting...</div>;
         }
 
-        return <div className='login grid'>
+        return <div className='login'>
 
             {message}
 

@@ -26,6 +26,23 @@ form legend {
     margin-top: 2rem;
 }
 
+.alert {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid;
+    border-radius: var(--pico-border-radius);
+}
+
+.alert-success {
+    color: var(--pico-ins-color);
+    border-color: var(--pico-ins-color);
+}
+
+.alert-danger {
+    color: var(--pico-del-color);
+    border-color: var(--pico-del-color);
+}
+
 .tag-form {
     margin-top: 1.5rem;
 }

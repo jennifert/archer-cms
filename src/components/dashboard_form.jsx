@@ -105,7 +105,7 @@ class DashboardForm extends Component {
                 <fieldset>
                     <legend>Create New Page/Post</legend>
 
-                    <div className="mb-3">
+                    <div>
                         <label htmlFor="title">Title</label>
                         <input
                             id="title"
@@ -117,7 +117,7 @@ class DashboardForm extends Component {
                         />
                     </div>
 
-                    <div className="mb-3">
+                    <div>
                         <label htmlFor="content">Content</label>
                         <textarea
                             id="content"
@@ -129,7 +129,7 @@ class DashboardForm extends Component {
                         />
                     </div>
 
-                    <div className="mb-3">
+                    <div>
                         <label htmlFor="category">Category</label>
                         <select
                             id="category"
@@ -150,7 +150,7 @@ class DashboardForm extends Component {
                         </select>
                     </div>
 
-                    <div className="mb-3">
+                    <div>
                         <label htmlFor="content-type">Content Type</label>
                         <select
                             id="content-type"

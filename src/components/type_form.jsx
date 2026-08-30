@@ -47,7 +47,7 @@ const TypeForm = ({ onDone, existing }) => {
             <fieldset>
                 <legend>{existing ? 'Edit' : 'Add New'} Content Type</legend>
                 {error && <div className="alert alert-danger">{error}</div>}
-                <div className="mb-3">
+                <div>
                     <label htmlFor="content-type-name">Name</label>
                     <input
                         id="content-type-name"
