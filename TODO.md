@@ -24,8 +24,24 @@ This file tracks future enhancements, improvements, and cleanup tasks.
 ---
 
 ### 🧠 Code Quality & Structure
-- [ ] Review remaining legacy CSS/component class names
 - [ ] Add shared frontend helpers for repeated API/error handling where useful
+- [ ] Create reusable form components for common CRUD operations
+    - Categories, Tags, and Content Types currently use similar add/edit forms
+    - Share common form layout, validation, error messages, Save/Cancel actions, and API handling where practical
+
+---
+
+### 📦 Dependencies & Maintenance
+- [ ] Review and test dependency updates individually
+- [ ] Review `dotenv` 16 → 17
+- [ ] Review `bcrypt` 5 → 6
+- [ ] Review `concurrently` 9 → 10
+- [ ] Plan ESLint 9 → 10 migration
+    - Upgrade `eslint` and `@eslint/js` together
+    - Verify React and `jsx-a11y` plugin compatibility
+- [ ] Plan Vite 6 → 8 migration
+    - Review `@vitejs/plugin-react` compatibility at the same time
+- [ ] Plan Express 4 → 5 migration separately
 
 ---
 
@@ -77,6 +93,7 @@ This file tracks future enhancements, improvements, and cleanup tasks.
 - [x] Add ESLint + `jsx-a11y` accessibility linting
 - [x] Upgrade SQLite dependency
 - [x] Verify page create/edit/delete operations after dependency upgrades
+- [x] Remove remaining legacy CSS/component class names after Pico migration
 
 ---
 
