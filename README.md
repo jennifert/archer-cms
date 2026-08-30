@@ -26,45 +26,60 @@ For details, see the [LICENSE](./LICENSE) file.
 ---
 
 ## 🚀 Features
-- SQLite via Sequelize (replaces MongoDB)
-- React + Vite (replaces Gulp & Browserify)
-- Passport local auth with bcrypt
+
+- SQLite database via Sequelize
+- React 19 frontend powered by Vite
+- Express.js backend
+- Passport local authentication with bcrypt password hashing
 - Role-based architecture (admin/author/viewer)
-- Image upload seeding (with `.gitkeep` protection)
-- Accessible and testable frontend
-- Modern ESLint config for React projects
+- Local image uploads with Multer
+- Database seeding for development and initial setup
+- Accessible frontend with ESLint and `jsx-a11y`
+- Lightweight responsive styling with Pico CSS
 
 ---
 
 ## 🛠 Tech Stack
 
-- **Frontend:** React 19, Vite, Tailwind CSS
+- **Frontend:** React 19, Vite, Pico CSS
 - **Backend:** Express.js, Passport (local strategy)
-- **Database:** SQLite (via Sequelize ORM)
+- **Database:** SQLite via Sequelize ORM
 - **Authentication:** bcrypt + Passport.js
-- **File Uploads:** Multer (local, seed images supported)
+- **File Uploads:** Multer (local storage)
+- **Linting:** ESLint + `eslint-plugin-react` + `eslint-plugin-jsx-a11y`
 
 ---
 
 ## 📦 Prerequisites
+
 Before you begin, ensure you have the following installed:
 
 - [Node.js](https://nodejs.org/) (version 22 or higher)
 - [npm](https://www.npmjs.com/) (version 10 or higher)
 - Git CLI for cloning
-- SQLite (auto-created via Sequelize — no setup needed)
+
+SQLite does not require separate setup. The database is created and managed locally through Sequelize.
 
 Optionally:
-- [VS Code](https://code.visualstudio.com/) + ESLint/Tailwind extensions
+
+- [VSCodium](https://vscodium.com/) or [Visual Studio Code](https://code.visualstudio.com/)
+- ESLint editor extension
 
 ---
 
-## 🧭 Project Structure (WIP)
-- /client -> React + Vite frontend
-- /server -> Express routes and auth
-- /public/images -> Uploaded content (not tracked by git)
-- /seed_assets -> Images for database seeding
-- .env -> Environment config
+## 🧭 Project Structure
+
+- `/src` — React frontend components and styles
+- `/server` — Express controllers, routes, middleware, and database models
+- `/public` — Static frontend assets
+- `/public/images` — Locally uploaded images
+- `/seed_assets` — Assets used by the database seeder
+- `/scripts` — Build and utility scripts
+- `app.js` — Express application entry point
+- `import.js` — Database seeding script
+- `vite.config.js` — Vite configuration and development API proxy
+- `.env` — Local environment configuration (not committed)
+- `.env.example` — Example environment configuration
 
 ---
 
@@ -82,98 +97,133 @@ Optionally:
     ```
 
 3. **Set Up Environment Variables**
-   Create a `.env` file in the project root with the following:
-   
-   ```env
-   NODE_ENV=development          # Can be 'development' or 'production'
-   PORT=5000                     # Server port
-   COOKIE_SECRET=changeme123     # Used to sign session cookies
-   COOKIE_SECURE=false           # Set to true in production with HTTPS
-   COOKIE_SAMESITE=lax           # Recommended: 'lax' or 'strict'
+
+   Copy the example environment file:
+
+   ```bash
+   cp .env.example .env
    ```
-   
-   > 💡 For production, make sure to change `COOKIE_SECRET` to something long and secure.
-   
-   📄 See [env.example](./env.example) for the latest template.
+
+   The development configuration should look similar to:
+
+   ```env
+   NODE_ENV=development
+   PORT=5001
+   COOKIE_SECRET=changeme123
+   COOKIE_SECURE=false
+   COOKIE_SAMESITE=lax
+   ```
+
+   > For production, replace `COOKIE_SECRET` with a long, secure value and enable secure cookies when using HTTPS.
+
+   See [`.env.example`](./.env.example) for the latest template.
 
 4. **Add a Sample Image**
-    Place a test image in:
-    ```
-    /seed_assets/sample1.jpg
-    ```
+
+   Place a test image at:
+
+   ```text
+   seed_assets/sample1.jpg
+   ```
 
 5. **Seed the Database**
-    Safe prompt:
-    ```bash
-    npm run seed:safe
-    ```
 
-    Or force seed:
-    ```bash
-    npm run seed
-    ```
+   For the interactive safe seed:
 
-6. **Start Development Server**
-    ```bash
-    npm run dev
-    ```
+   ```bash
+   npm run seed:safe
+   ```
+
+   To force a database reset and seed:
+
+   ```bash
+   npm run seed
+   ```
+
+   > ⚠️ `npm run seed` is destructive and may overwrite existing database content.
+
+6. **Start the Backend**
+
+   In one terminal:
+
+   ```bash
+   npm start
+   ```
+
+7. **Start the Frontend**
+
+   In a second terminal:
+
+   ```bash
+   npm run dev
+   ```
+
+   Vite will proxy `/api` requests to the Express server using the configured backend port.
 
 ---
 
 ## 📜 NPM Scripts
 
-| Command             | Description                                 |
-|---------------------|---------------------------------------------|
-| `npm run dev`       | Starts Vite (frontend) and Nodemon (server) |
-| `npm run seed`      | Force seeds the database                    |
-| `npm run seed:safe` | Safe seeding with confirmation prompt       |
-| `npm run build`     | Builds frontend and runs postbuild scripts  |
-| `npm run serve`     | Serves the production frontend build        |
+| Command             | Description                                      |
+|---------------------|--------------------------------------------------|
+| `npm run dev`       | Starts the Vite development server               |
+| `npm start`         | Starts the Express backend                       |
+| `npm run seed`      | Force seeds and resets the database              |
+| `npm run seed:safe` | Runs the database seeder with confirmation       |
+| `npm run lint`      | Runs ESLint                                      |
+| `npm run build`     | Builds the frontend and runs postbuild scripts   |
+| `npm run serve`     | Previews the production frontend build with Vite |
+
+> During development, run `npm run dev` and `npm start` in separate terminals.
 
 ---
 
 ## ✅ Notes
 
-- The database (`db.sqlite`) and uploaded images (`public/images/`) are auto-generated during seeding.
-- `.gitkeep` is used to track empty folders for uploads.
-- Modify `import.js` to customize your seed content.
+- The SQLite database (`db.sqlite`) is created locally and is not intended to be committed.
+- Uploaded images are stored in `public/images/`.
+- `.gitkeep` is used to preserve empty directories where needed.
+- `import.js` contains the development seed data.
+- `npm run seed` performs a forced database seed and may overwrite existing development data. Use it with care.
+- Pico CSS provides the base frontend styling, with additional project-specific styles where needed.
 
 ### ✍️ Rich Text Editor
-Editor: TBD 
 
-This CMS supports WYSIWYG editing via [Example](https://example.org).  
-To customize behavior or sanitize output, see `/src/components/______.jsx`.
+A rich text editor is planned but has not yet been implemented.
+
+The dashboard currently uses a standard `<textarea>` for content editing. See `TODO.md` for the planned WYSIWYG editor work.
 
 ---
 
 ## 📘 Documentation
 
 - [`TODO.md`](./TODO.md) — Roadmap and planned enhancements
-- [`API_REFERENCE.md`](./API_REFERENCE.md) — Full list of backend API routes
-- `/api/settings/endpoints` — Dev-only route that returns all current Express routes dynamically
+- [`API_REFERENCE.md`](./API_REFERENCE.md) — Backend API route reference
+- `/api/settings/endpoints` — Development endpoint that returns the currently registered Express routes
 
 ---
 
-## 🚢 Deployment (Coming Soon)
+## 🚢 Deployment
 
-TBD
+Production deployment documentation is planned. See `TODO.md` for deployment-related work.
 
 ---
 
 ## 📌 TODO Highlights
 
-See [TODO.md](TODO.md) for full roadmap.
+See [`TODO.md`](./TODO.md) for the full roadmap.
 
-- Add role-based route protection (`requireRole('admin')`)
-- Password strength validation
-- Integration testing (Jest/Vitest)
-- Production build + deploy (Render, Docker, etc.)
+- Apply role-based route protection with `requireRole('admin')`
+- Improve password validation and authentication security
+- Add unit and integration testing
+- Add a rich text editor
+- Establish a production deployment process
 
 ---
 
-## :gem: Acknowledgments
+## 💎 Acknowledgments
 
 This project would not be possible without these fantastic community resources:
 
-- [Shields.io](https://shields.io/) — For README badges
-- [Awesome README](https://github.com/matiassingers/awesome-readme) — For formatting inspiration
+- [Shields.io](https://shields.io/) — README badges
+- [Awesome README](https://github.com/matiassingers/awesome-readme) — README formatting inspiration
