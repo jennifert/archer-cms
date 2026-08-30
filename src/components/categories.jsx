@@ -75,8 +75,10 @@ const Categories = () => {
                             <tr key={cat.id}>
                                 <td>{cat.name}</td>
                                 <td>
-                                    <button className="btn btn-sm btn-info me-2" onClick={() => handleEdit(cat)}>Edit</button>
-                                    <button className="btn btn-sm btn-danger" onClick={() => handleDelete(cat.id)}>Delete</button>
+                                    <div className="actions">
+                                    <button onClick={() => handleEdit(cat)}>Edit</button>
+                                    <button onClick={() => handleDelete(cat.id)}>Delete</button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}

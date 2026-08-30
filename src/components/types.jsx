@@ -75,8 +75,10 @@ const Types = () => {
                             <tr key={type.id}>
                                 <td>{type.name}</td>
                                 <td>
-                                    <button onClick={() => handleEdit(type)} className="btn btn-sm btn-info me-2">Edit</button>
-                                    <button onClick={() => handleDelete(type.id)} className="btn btn-sm btn-danger">Delete</button>
+                                    <div className="actions">
+                                        <button onClick={() => handleEdit(type)}>Edit</button>
+                                        <button onClick={() => handleDelete(type.id)}>Delete</button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}

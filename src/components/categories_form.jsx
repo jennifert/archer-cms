@@ -58,7 +58,7 @@ const CategoryForm = ({ onDone, existing }) => {
                     />
                 </div>
                 <button type="submit">Save</button>
-                <button type="button" onClick={onDone}>Cancel</button>
+                <button type="button" className="secondary" onClick={onDone}>Cancel</button>
             </fieldset>
         </form>
     );

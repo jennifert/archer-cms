@@ -60,10 +60,12 @@ const DashboardTable = ({
             <td>
                 {isOwner && (
                     <>
-                        <button onClick={handleEditClick} className="btn btn-sm btn-warning me-2">Edit</button>
-                        <button onClick={deletePage} className="btn btn-sm btn-danger">
+                    <div className="actions">
+                        <button onClick={handleEditClick}>Edit</button>
+                        <button onClick={deletePage}>
                             Delete
                         </button>
+                    </div>
                     </>
                 )}
             </td>

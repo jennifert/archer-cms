@@ -59,11 +59,11 @@ class App extends React.Component {
 
     renderAuthenticated() {
         return (
-            <div className="min-h-screen flex flex-col md:flex-row">
+            <div className="min-h-screen container">
                 <SideMenu />
-                <main className="flex-1 p-6">
-                    <div className="flex justify-end mb-4 logout-button">
-                        <button onClick={this.logout} className="btn">
+                <main>
+                    <div className="logout-button">
+                        <button onClick={this.logout} className="secondary">
                             Logout
                         </button>
                     </div>
@@ -87,14 +87,12 @@ class App extends React.Component {
                 <Route
                     path="/"
                     element={
-                        <div className="flex flex-col md:flex-row gap-6 p-8">
-                            <div className="flex-1">
+                        <main className="container">
+                            <div className="grid">
                                 <CreateUser refresh={this.refresh} />
-                            </div>
-                            <div className="flex-1">
                                 <LoginForm refresh={this.refresh} login={this.login} />
                             </div>
-                        </div>
+                        </main>
                     }
                 />
                 <Route path="*" element={<Navigate to="/" replace />} />
@@ -105,7 +103,7 @@ class App extends React.Component {
     render() {
         return (
             <Router>
-                <header>
+                <header className="container">
                     <h1>Archer CMS</h1>
                 </header>
 

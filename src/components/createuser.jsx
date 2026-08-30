@@ -71,7 +71,7 @@ class CreateUser extends React.Component {
             </div>;
         }
 
-        return <div className='create-user rounded-box w-xs'>
+        return <div className='create-user'>
             
 
             <form onSubmit={this.handleSubmit} className='createUserForm'>

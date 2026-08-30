@@ -76,7 +76,7 @@ class TagForm extends React.Component {
                     <button type="submit">
                         Save
                     </button>
-                    <button type="button" onClick={onClose}>
+                    <button type="button" className="secondary" onClick={onClose}>
                         Cancel
                     </button>
                 </fieldset>

@@ -101,14 +101,16 @@ class Tags extends React.Component {
                                     <td>{tag.name}</td>
                                     <td>{tag.User?.name || 'Unknown'}</td>
                                     <td>
-                                        <button className="btn btn-sm btn-outline-primary me-2"
-                                            onClick={() => this.openForm('Edit', tag)}>
-                                            Edit
-                                        </button>
-                                        <button className="btn btn-sm btn-outline-danger"
-                                            onClick={() => this.deleteTag(tag.id)}>
-                                            Delete
-                                        </button>
+                                        <div className="actions">
+                                            <button
+                                                onClick={() => this.openForm('Edit', tag)}>
+                                                Edit
+                                            </button>
+                                            <button
+                                                onClick={() => this.deleteTag(tag.id)}>
+                                                Delete
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             ))}
