@@ -60,7 +60,7 @@ class App extends React.Component {
     renderAuthenticated() {
         return (
             <div className="container">
-                <SideMenu />
+                <SideMenu user={this.state.user} />
                 <main>
                     <div className="logout-button">
                         <button onClick={this.logout} className="secondary">
@@ -72,7 +72,12 @@ class App extends React.Component {
                         <Route path="/tags/*" element={<Tags user={this.state.user} />} />
                         <Route path="/categories/*" element={<Categories user={this.state.user} />} />
                         <Route path="/imageheaders/*" element={<ImageHeaders user={this.state.user} />} />
-                        <Route path="/endpoints/*" element={<Endpoints user={this.state.user} />} />
+                        {this.state.user?.role === 'admin' && (
+                            <Route
+                                path="/endpoints/*"
+                                element={<Endpoints user={this.state.user} />}
+                            />
+                        )}
                         <Route path="/types/*" element={<ContentTypes user={this.state.user} />} />
                         <Route path="*" element={<Navigate to="/dashboard" replace />} />
                     </Routes>
